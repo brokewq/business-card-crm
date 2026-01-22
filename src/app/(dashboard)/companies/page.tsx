@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useToast } from '@/components/ui/Toast';
 import { Building2, Users, Globe, Loader2, Search } from 'lucide-react';
@@ -27,9 +27,12 @@ export default function CompaniesPage() {
         }, 300);
 
         return () => clearTimeout(timer);
-    }, [searchQuery]);
+    }, [searchQuery]); // fetchCompanies is stable if we don't include it, but let's be safe or just leave it as is if I don't wrap it. 
 
-    const fetchCompanies = async () => {
+    // Actually, simply moving the function definition check isn't enough. 
+    // Best practice: wrap in useCallback.
+
+    const fetchCompanies = useCallback(async () => {
         setLoading(true);
         try {
             const params = new URLSearchParams();
@@ -45,7 +48,15 @@ export default function CompaniesPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [searchQuery, showToast]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            fetchCompanies();
+        }, 300);
+
+        return () => clearTimeout(timer);
+    }, [fetchCompanies]);
 
     return (
         <div className="pb-20 lg:pb-0 space-y-6">

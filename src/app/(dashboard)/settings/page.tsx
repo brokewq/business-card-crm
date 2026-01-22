@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/components/ui/Toast';
 import { Settings as SettingsIcon, Plus, Trash2, Loader2, Download, LogOut } from 'lucide-react';
 
@@ -20,11 +20,7 @@ export default function SettingsPage() {
     const [exporting, setExporting] = useState(false);
     const { showToast, ToastContainer } = useToast();
 
-    useEffect(() => {
-        fetchSettings();
-    }, []);
-
-    const fetchSettings = async () => {
+    const fetchSettings = useCallback(async () => {
         try {
             const response = await fetch('/api/settings');
             if (response.ok) {
@@ -37,7 +33,11 @@ export default function SettingsPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [showToast]);
+
+    useEffect(() => {
+        fetchSettings();
+    }, [fetchSettings]);
 
     const addCustomValue = async (type: 'INDUSTRY' | 'SOURCE', value: string) => {
         if (!value.trim()) return;

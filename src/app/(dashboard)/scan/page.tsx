@@ -449,7 +449,7 @@ export default function ScanPage() {
                                 <h3 className="text-xl font-bold text-white mb-2">Start Scanning</h3>
                                 <p className="text-dark-400 max-w-sm mx-auto mb-8">
                                     Place your business card in a well-lit area.
-                                    We'll extract all contact details automatically.
+                                    We&apos;ll extract all contact details automatically.
                                 </p>
                                 <button onClick={startCamera} className="btn btn-primary px-8 py-3 text-lg shadow-xl shadow-primary-500/20">
                                     <Camera className="w-6 h-6 mr-2" />
