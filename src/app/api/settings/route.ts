@@ -33,8 +33,8 @@ export async function GET(request: NextRequest) {
         const sources = [...DEFAULT_SOURCES, ...customSources];
 
         return NextResponse.json({
-            industries: [...new Set(industries)],
-            sources: [...new Set(sources)],
+            industries: Array.from(new Set(industries)),
+            sources: Array.from(new Set(sources)),
         });
     } catch (error) {
         return NextResponse.json({ error: 'Failed to fetch settings' }, { status: 500 });
