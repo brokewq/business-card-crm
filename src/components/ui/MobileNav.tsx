@@ -1,12 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import {
-    Users,
-    Building2,
-    Camera,
-} from 'lucide-react';
 
 interface MobileNavProps {
     userEmail: string;
@@ -26,10 +22,14 @@ export function MobileNav({ userEmail }: MobileNavProps) {
                         : 'text-gray-500 hover:text-navy-700'
                         }`}
                 >
-                    <Users
-                        className={`w-6 h-6 mb-1 ${pathname === '/contacts' ? 'text-accent-500 fill-accent-50' : 'text-gray-400 group-hover:text-navy-700'}`}
-                        strokeWidth={pathname === '/contacts' ? 2.5 : 2}
-                    />
+                    <div className="w-7 h-7 relative mb-1">
+                        <Image
+                            src="/icons/clay-icon-contacts.png"
+                            alt="Contacts"
+                            fill
+                            className={`object-contain transition-all ${pathname === '/contacts' ? 'scale-110 drop-shadow-md' : 'opacity-80 grayscale-[0.5]'}`}
+                        />
+                    </div>
                     <span className={`text-[10px] font-bold ${pathname === '/contacts' ? 'text-navy-800' : 'text-gray-500'}`}>Contacts</span>
                 </Link>
 
@@ -40,9 +40,16 @@ export function MobileNav({ userEmail }: MobileNavProps) {
                 >
                     <div className={`w-16 h-16 mb-1 rounded-full flex items-center justify-center shadow-clay-lg transition-transform duration-300 group-active:scale-95 ${pathname === '/scan'
                         ? 'bg-gradient-to-br from-accent-400 to-accent-600 ring-4 ring-accent-100 shadow-glow-orange'
-                        : 'bg-gradient-to-br from-navy-800 to-navy-900 ring-4 ring-white shadow-clay'
+                        : 'bg-white ring-4 ring-white shadow-clay'
                         }`}>
-                        <Camera className="w-8 h-8 text-white" strokeWidth={2} />
+                        <div className="w-10 h-10 relative">
+                            <Image
+                                src="/icons/clay-icon-scan.png"
+                                alt="Scan"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
                     </div>
                     <span className={`text-[10px] font-bold ${pathname === '/scan' ? 'text-accent-600' : 'text-gray-500'}`}>
                         Scan
@@ -57,10 +64,14 @@ export function MobileNav({ userEmail }: MobileNavProps) {
                         : 'text-gray-500 hover:text-navy-700'
                         }`}
                 >
-                    <Building2
-                        className={`w-6 h-6 mb-1 ${pathname === '/companies' ? 'text-accent-500 fill-accent-50' : 'text-gray-400 group-hover:text-navy-700'}`}
-                        strokeWidth={pathname === '/companies' ? 2.5 : 2}
-                    />
+                    <div className="w-7 h-7 relative mb-1">
+                        <Image
+                            src="/icons/clay-icon-companies.png"
+                            alt="Companies"
+                            fill
+                            className={`object-contain transition-all ${pathname === '/companies' ? 'scale-110 drop-shadow-md' : 'opacity-80 grayscale-[0.5]'}`}
+                        />
+                    </div>
                     <span className={`text-[10px] font-bold ${pathname === '/companies' ? 'text-navy-800' : 'text-gray-500'}`}>Companies</span>
                 </Link>
             </div>
