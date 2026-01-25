@@ -24,13 +24,21 @@
     border-color: var(--border);
   }
 
-  html {
+  html,
+  body {
+    @apply antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    touch-action: manipulation;
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   }
 
   body {
-    @apply bg-clay-bg text-navy-900 antialiased;
+    @apply bg-clay-bg text-navy-900;
+    min-height: 100dvh;
     min-height: 100vh;
+    /* Fallback */
   }
 }
 
@@ -112,8 +120,11 @@
 
   /* Sidebar Styles - Claymorphism */
   .sidebar {
-    @apply w-64 bg-white border-r border-clay-border h-screen sticky top-0;
+    @apply w-64 bg-white border-r border-clay-border sticky top-0;
     @apply shadow-clay;
+    height: 100dvh;
+    height: 100vh;
+    /* Fallback */
   }
 
   .sidebar-link {

@@ -362,7 +362,7 @@ export default function ScanPage() {
 
     // Capture stage
     return (
-        <div className="max-w-4xl mx-auto pb-20 lg:pb-0 h-[calc(100vh-100px)] flex flex-col">
+        <div className="max-w-4xl mx-auto pb-20 lg:pb-0 h-[calc(100dvh-100px)] flex flex-col">
             <div className="mb-4">
                 <h1 className="text-2xl font-bold text-navy-800">Scan Business Card</h1>
                 <p className="text-gray-500 mt-1">
