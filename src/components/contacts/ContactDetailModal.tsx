@@ -161,10 +161,12 @@ export function ContactDetailModal({
                                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                                     {/* Phones */}
                                     {contact.phone && contact.phone.map((phone, idx) => (
-                                        <div key={`phone-${idx}`} className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border">
+                                        <div key={`phone-${idx}`} className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border min-h-[64px]">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <Phone className="w-5 h-5 text-accent-500 flex-shrink-0" />
-                                                <a href={`tel:${phone}`} className="text-navy-700 break-all hover:text-accent-600 transition-colors">{phone}</a>
+                                                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
+                                                    <Phone className="w-5 h-5 text-accent-500" />
+                                                </div>
+                                                <a href={`tel:${phone}`} className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors leading-none pt-0.5">{phone}</a>
                                             </div>
                                             <CopyButton text={phone} field={`phone-${idx}`} />
                                         </div>
@@ -172,10 +174,12 @@ export function ContactDetailModal({
 
                                     {/* Emails */}
                                     {contact.email && contact.email.map((email, idx) => (
-                                        <div key={`email-${idx}`} className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2 xl:col-span-1">
+                                        <div key={`email-${idx}`} className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2 xl:col-span-1 min-h-[64px]">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <Mail className="w-5 h-5 text-accent-500 flex-shrink-0" />
-                                                <a href={`mailto:${email}`} className="text-navy-700 break-all hover:text-accent-600 transition-colors">{email}</a>
+                                                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
+                                                    <Mail className="w-5 h-5 text-accent-500" />
+                                                </div>
+                                                <a href={`mailto:${email}`} className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors leading-none pt-0.5">{email}</a>
                                             </div>
                                             <CopyButton text={email} field={`email-${idx}`} />
                                         </div>
@@ -183,10 +187,12 @@ export function ContactDetailModal({
 
                                     {/* Website */}
                                     {contact.website && (
-                                        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2">
+                                        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2 min-h-[64px]">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <Globe className="w-5 h-5 text-accent-500 flex-shrink-0" />
-                                                <a href={contact.website} target="_blank" rel="noopener noreferrer" className="text-navy-700 break-all hover:text-accent-600 transition-colors">{contact.website}</a>
+                                                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
+                                                    <Globe className="w-5 h-5 text-accent-500" />
+                                                </div>
+                                                <a href={contact.website} target="_blank" rel="noopener noreferrer" className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors leading-none pt-0.5">{contact.website}</a>
                                             </div>
                                             <CopyButton text={contact.website} field="website" />
                                         </div>
@@ -194,10 +200,12 @@ export function ContactDetailModal({
 
                                     {/* Address */}
                                     {contact.address && (
-                                        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2">
+                                        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2 min-h-[64px]">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <MapPin className="w-5 h-5 text-accent-500 flex-shrink-0" />
-                                                <span className="text-navy-700 break-words">{contact.address}</span>
+                                                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
+                                                    <MapPin className="w-5 h-5 text-accent-500" />
+                                                </div>
+                                                <span className="text-navy-800 font-medium break-words leading-tight">{contact.address}</span>
                                             </div>
                                             <CopyButton text={contact.address} field="address" />
                                         </div>
