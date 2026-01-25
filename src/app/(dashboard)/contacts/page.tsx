@@ -292,7 +292,7 @@ export default function ContactsPage() {
                         onSort={handleSort}
                     />
                 ) : (
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 min-w-0">
                         {contacts.map((contact) => (
                             <ContactCard
                                 key={contact.id}
