@@ -49,7 +49,7 @@ export default function CompaniesPage() {
     }, [fetchCompanies]);
 
     return (
-        <div className="pb-20 lg:pb-0 space-y-6">
+        <div className="pb-20 lg:pb-0 space-y-6 min-w-0">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-navy-800">Companies</h1>
@@ -98,7 +98,7 @@ export default function CompaniesPage() {
                     </p>
                 </div>
             ) : (
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 min-w-0">
                     {companies.map((company) => (
                         <Link href={`/companies/${company.id}`} key={company.id} className="block group">
                             <div className="card card-hover p-5 h-full group-hover:border-accent-400 transition-colors">
