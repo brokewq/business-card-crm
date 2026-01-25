@@ -122,7 +122,7 @@ export default function SettingsPage() {
             {/* Account Management */}
             <div className="card p-6 mb-6">
                 <h2 className="text-lg font-semibold text-navy-500 mb-4">Account</h2>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <p className="text-gray-600 font-medium">Session Control</p>
                         <p className="text-gray-500 text-sm">Sign out to end your current session safely.</p>
@@ -134,7 +134,7 @@ export default function SettingsPage() {
                             await supabase.auth.signOut();
                             window.location.href = '/login';
                         }}
-                        className="btn bg-red-500/10 text-red-500 hover:bg-red-500/20 border-red-500/20"
+                        className="btn whitespace-nowrap bg-red-50 text-red-600 hover:bg-red-100 border-red-200"
                     >
                         <LogOut className="w-5 h-5 mr-2" />
                         Sign Out

@@ -55,12 +55,12 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
                     e.stopPropagation();
                     onToggleSelect();
                 }}
-                className={`flex-shrink-0 w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center ${isSelected
+                className={`flex-shrink-0 w-6 h-6 rounded-lg border-2 transition-all duration-200 flex items-center justify-center aspect-square self-center ${isSelected
                     ? 'bg-accent-500 border-accent-500 shadow-sm'
                     : 'border-gray-300 hover:border-accent-400 bg-white'
                     }`}
             >
-                {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
+                {isSelected && <Check className="w-4 h-4 text-white" strokeWidth={3} />}
             </button>
         </div>
     );
