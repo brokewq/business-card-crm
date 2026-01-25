@@ -35,36 +35,36 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4 bg-clay-bg relative overflow-hidden">
-            {/* Mesh Gradient Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-accent-200/30 blur-[120px] animate-pulse" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-navy-200/20 blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-                <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-orange-200/20 blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="min-h-screen flex items-center justify-center p-4 bg-[#F4F7FA]">
+            {/* Background decoration */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-200/20 rounded-full blur-3xl animate-float" />
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-navy-200/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+                <div className="absolute top-1/4 left-10 w-20 h-20 bg-white rounded-full shadow-clay blur-sm opacity-60 animate-float" style={{ animationDelay: '1s' }} />
+                <div className="absolute bottom-1/3 right-10 w-16 h-16 bg-white rounded-full shadow-clay blur-sm opacity-60 animate-float" style={{ animationDelay: '3s' }} />
             </div>
 
             <div className="w-full max-w-md relative z-10">
                 {/* Logo */}
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent-400 to-accent-600 mb-6 shadow-clay-lg hover:scale-105 transition-transform duration-300">
-                        <Sparkles className="w-10 h-10 text-white drop-shadow-md" strokeWidth={1.5} />
+                <div className="text-center mb-8">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent-400 to-accent-600 mb-6 shadow-glow-orange transform rotate-3">
+                        <Sparkles className="w-10 h-10 text-white" />
                     </div>
-                    <h1 className="text-4xl font-extrabold text-navy-900 tracking-tight">CardCRM</h1>
-                    <p className="text-gray-500 mt-2 text-lg">Sign in to your account</p>
+                    <h1 className="text-4xl font-extrabold text-navy-800 tracking-tight">Welcome Back</h1>
+                    <p className="text-gray-500 mt-2 text-lg">Sign in to your CardCRM account</p>
                 </div>
 
                 {/* Login Card */}
-                <div className="card p-8 shadow-clay-lg bg-white/80 backdrop-blur-xl border-white/50">
+                <div className="card p-8 shadow-clay-lg bg-white border-2 border-white/50">
                     <form onSubmit={handleLogin} className="space-y-6">
                         {error && (
-                            <div className="p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
-                                {error}
+                            <div className="p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm flex items-start gap-2">
+                                <span className="font-bold">Error:</span> {error}
                             </div>
                         )}
 
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="label text-navy-800">Email Address</label>
+                        <div>
+                            <label htmlFor="email" className="label text-navy-700 font-semibold mb-2 block">Email</label>
                             <div className="relative group">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-accent-500 transition-colors" />
                                 <input
@@ -72,17 +72,15 @@ export default function LoginPage() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="input pl-12 h-12 text-base shadow-clay-inset"
+                                    className="input pl-12 py-3 bg-gray-50 border-transparent focus:bg-white transition-all shadow-inner-sm"
                                     placeholder="you@example.com"
                                     required
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="label text-navy-800">Password</label>
-                            </div>
+                        <div>
+                            <label htmlFor="password" className="label text-navy-700 font-semibold mb-2 block">Password</label>
                             <div className="relative group">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-accent-500 transition-colors" />
                                 <input
@@ -90,7 +88,7 @@ export default function LoginPage() {
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="input pl-12 h-12 text-base shadow-clay-inset"
+                                    className="input pl-12 py-3 bg-gray-50 border-transparent focus:bg-white transition-all shadow-inner-sm"
                                     placeholder="••••••••"
                                     required
                                 />
@@ -100,11 +98,11 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn btn-primary w-full h-12 text-lg font-bold shadow-glow-orange"
+                            className="btn btn-primary w-full py-4 text-lg font-bold shadow-glow-orange hover:translate-y-[-2px] transition-all"
                         >
                             {loading ? (
                                 <>
-                                    <Loader2 className="w-6 h-6 animate-spin" />
+                                    <Loader2 className="w-5 h-5 animate-spin" />
                                     Signing in...
                                 </>
                             ) : (
@@ -113,11 +111,11 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+                    <div className="mt-8 text-center text-sm">
                         <p className="text-gray-500">
                             Don&apos;t have an account?{' '}
-                            <Link href="/signup" className="text-accent-600 hover:text-accent-500 font-bold underline underline-offset-4 decoration-accent-200 hover:decoration-accent-500 transition-all">
-                                Create one free
+                            <Link href="/signup" className="text-accent-600 hover:text-accent-700 font-bold hover:underline">
+                                Sign up now
                             </Link>
                         </p>
                     </div>
