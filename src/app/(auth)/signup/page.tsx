@@ -63,8 +63,9 @@ export default function SignupPage() {
             <div className="w-full max-w-md relative z-10">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent-400 to-accent-600 mb-6 shadow-glow-orange transform -rotate-3">
-                        <User className="w-10 h-10 text-white" />
+                    <div className="inline-flex items-center justify-center w-24 h-24 mb-6 transition-transform hover:scale-105 duration-300">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/icons/logo.png" alt="CardCRM Logo" className="w-full h-full object-contain drop-shadow-glow-orange" />
                     </div>
                     <h1 className="text-4xl font-extrabold text-navy-800 tracking-tight">Create Account</h1>
                     <p className="text-gray-500 mt-2 text-lg">Start managing your contacts with AI</p>

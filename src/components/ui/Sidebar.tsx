@@ -40,8 +40,9 @@ export function Sidebar({ userEmail }: SidebarProps) {
                 {/* Logo */}
                 <div className="p-6 border-b border-clay-border">
                     <Link href="/contacts" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center shadow-clay-md transition-transform group-hover:scale-105">
-                            <Sparkles className="w-5 h-5 text-white" />
+                        <div className="w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-105">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/icons/logo.png" alt="CardCRM Logo" className="w-full h-full object-contain" />
                         </div>
                         <div>
                             <h1 className="font-bold text-lg text-navy-800">CardCRM</h1>
