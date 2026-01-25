@@ -14,7 +14,7 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
     return (
         <div
             onClick={onClick}
-            className={`card card-hover p-4 cursor-pointer flex items-center gap-4 ${isSelected ? 'ring-2 ring-accent-500 border-accent-300' : ''
+            className={`card card-hover p-4 cursor-pointer flex items-center gap-4 min-h-[120px] h-full ${isSelected ? 'ring-2 ring-accent-500 border-accent-300' : ''
                 }`}
         >
             {/* Content */}

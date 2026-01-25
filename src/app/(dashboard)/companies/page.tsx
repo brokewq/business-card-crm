@@ -100,8 +100,8 @@ export default function CompaniesPage() {
             ) : (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 min-w-0">
                     {companies.map((company) => (
-                        <Link href={`/companies/${company.id}`} key={company.id} className="block group">
-                            <div className="card card-hover p-5 h-full group-hover:border-accent-400 transition-colors">
+                        <Link href={`/companies/${company.id}`} key={company.id} className="block group h-full">
+                            <div className="card card-hover p-5 h-full min-h-[160px] flex flex-col justify-between group-hover:border-accent-400 transition-colors">
                                 <div className="flex items-start gap-4">
                                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-100 to-accent-200 flex items-center justify-center flex-shrink-0">
                                         <Building2 className="w-6 h-6 text-accent-600" />
@@ -121,11 +121,13 @@ export default function CompaniesPage() {
                                         )}
                                     </div>
                                 </div>
-                                <div className="mt-4 pt-4 border-t border-gray-200/50 flex items-center gap-2 text-gray-500">
-                                    <Users className="w-4 h-4" />
-                                    <span className="text-sm">
-                                        {company.contacts?.[0]?.count || 0} contact{(company.contacts?.[0]?.count || 0) !== 1 ? 's' : ''}
-                                    </span>
+                                <div className="mt-4 pt-4 border-t border-gray-200/50 flex items-center justify-between text-gray-500">
+                                    <div className="flex items-center gap-2">
+                                        <Users className="w-4 h-4" />
+                                        <span className="text-sm">
+                                            {company.contacts?.[0]?.count || 0} contact{(company.contacts?.[0]?.count || 0) !== 1 ? 's' : ''}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </Link>
