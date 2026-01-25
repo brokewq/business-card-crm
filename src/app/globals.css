@@ -24,21 +24,25 @@
     border-color: var(--border);
   }
 
-  html,
-  body {
-    @apply antialiased;
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
-    touch-action: manipulation;
+  html {
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
   }
 
   body {
-    @apply bg-clay-bg text-navy-900;
-    min-height: 100dvh;
+    @apply bg-clay-bg text-navy-900 antialiased;
     min-height: 100vh;
-    /* Fallback */
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Prevent iOS zoom on inputs */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }
 
@@ -120,11 +124,8 @@
 
   /* Sidebar Styles - Claymorphism */
   .sidebar {
-    @apply w-64 bg-white border-r border-clay-border sticky top-0;
+    @apply w-64 bg-white border-r border-clay-border h-screen sticky top-0;
     @apply shadow-clay;
-    height: 100dvh;
-    height: 100vh;
-    /* Fallback */
   }
 
   .sidebar-link {

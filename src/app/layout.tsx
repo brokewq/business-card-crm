@@ -18,12 +18,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    themeColor: "#f97316",
+    themeColor: "#F4F7FA",
     width: "device-width",
     initialScale: 1,
     maximumScale: 1,
     userScalable: false,
-    viewportFit: "cover",
+    // Prevents content from being hidden behind virtual keyboard
+    interactiveWidget: 'resizes-content',
 };
 
 export default function RootLayout({
@@ -37,7 +38,7 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             </head>
-            <body className="min-h-screen bg-dark-900 text-dark-50 antialiased">
+            <body className="min-h-screen bg-clay-bg text-navy-900 antialiased overflow-x-hidden selection:bg-accent-200 selection:text-navy-900">
                 <KeyboardShortcuts />
                 {children}
             </body>
