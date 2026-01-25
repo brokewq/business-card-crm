@@ -50,18 +50,20 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
             </div>
 
             {/* Selection checkbox */}
-            <button
-                onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleSelect();
-                }}
-                className={`flex-shrink-0 w-6 h-6 rounded-lg border-2 transition-all duration-200 flex items-center justify-center aspect-square self-center ${isSelected
-                    ? 'bg-accent-500 border-accent-500 shadow-sm'
-                    : 'border-gray-300 hover:border-accent-400 bg-white'
-                    }`}
-            >
-                {isSelected && <Check className="w-4 h-4 text-white" strokeWidth={3} />}
-            </button>
+            <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 self-center">
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleSelect();
+                    }}
+                    className={`w-6 h-6 rounded-lg border-2 transition-all duration-200 flex items-center justify-center aspect-square ${isSelected
+                        ? 'bg-accent-500 border-accent-500 shadow-sm'
+                        : 'border-gray-300 hover:border-accent-400 bg-white shadow-inner-sm'
+                        }`}
+                >
+                    {isSelected && <Check className="w-4 h-4 text-white" strokeWidth={3.5} />}
+                </button>
+            </div>
         </div>
     );
 }
