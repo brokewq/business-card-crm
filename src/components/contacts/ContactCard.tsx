@@ -14,7 +14,7 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
     return (
         <div
             onClick={onClick}
-            className={`card card-hover p-4 cursor-pointer grid grid-cols-[1fr,auto] items-center gap-4 ${isSelected ? 'ring-2 ring-accent-500 border-accent-300' : ''
+            className={`card card-hover p-4 cursor-pointer flex items-center gap-4 ${isSelected ? 'ring-2 ring-accent-500 border-accent-300' : ''
                 }`}
         >
             {/* Content */}
@@ -49,19 +49,21 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
                 )}
             </div>
 
-            {/* Selection checkbox */}
-            <div className="flex items-center justify-center w-6 h-6">
+            {/* Selection Checkbox Section */}
+            <div className="flex-none flex items-center justify-center pl-2">
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
                         onToggleSelect();
                     }}
-                    className={`w-5 h-5 rounded-md border-2 transition-all duration-200 flex items-center justify-center aspect-square ${isSelected
-                        ? 'bg-accent-500 border-accent-500 shadow-sm'
+                    className={`w-6 h-6 min-w-[24px] min-h-[24px] rounded-lg border-2 transition-all duration-200 flex items-center justify-center ${isSelected
+                        ? 'bg-accent-500 border-accent-500 shadow-clay-sm animate-clay-pop'
                         : 'border-gray-300 hover:border-accent-400 bg-white shadow-inner-sm'
                         }`}
                 >
-                    {isSelected && <Check className="w-3.5 h-3.5 text-white" strokeWidth={4} />}
+                    {isSelected && (
+                        <Check className="w-4 h-4 text-white" strokeWidth={4} />
+                    )}
                 </button>
             </div>
         </div>
