@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import {
@@ -18,10 +17,10 @@ interface SidebarProps {
 }
 
 const navItems = [
-    { href: '/contacts', icon: Users, label: 'Contacts' },
-    { href: '/companies', icon: Building2, label: 'Companies' },
-    { href: '/scan', icon: Camera, label: 'Scan Card' },
-    { href: '/settings', icon: Settings, label: 'Settings' },
+    { href: '/contacts', icon: Users, image: '/icons/contacts-icon.png', label: 'Contacts' },
+    { href: '/companies', icon: Building2, image: '/icons/companies-icon.png', label: 'Companies' },
+    { href: '/scan', icon: Camera, image: '/icons/scan-icon.png', label: 'Scan Card' },
+    { href: '/settings', icon: Settings, image: '/icons/settings-icon.png', label: 'Settings' },
 ];
 
 export function Sidebar({ userEmail }: SidebarProps) {
@@ -59,12 +58,23 @@ export function Sidebar({ userEmail }: SidebarProps) {
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`sidebar-link h-12 ${isActive ? 'sidebar-link-active bg-white border-2 border-accent-200 shadow-sm' : ''}`}
+                                className={`sidebar-link h-16 ${isActive ? 'sidebar-link-active bg-white border-2 border-accent-200 shadow-sm' : ''}`}
                             >
-                                <item.icon
-                                    className={`w-5 h-5 transition-all duration-300 ${isActive ? 'text-accent-500 drop-shadow-sm' : 'text-gray-400 group-hover:text-navy-700'}`}
-                                    strokeWidth={isActive ? 2.5 : 2}
-                                />
+                                {item.image ? (
+                                    <div className="w-10 h-10 relative flex-shrink-0">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={item.image}
+                                            alt={item.label}
+                                            className={`w-full h-full object-contain transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}
+                                        />
+                                    </div>
+                                ) : (
+                                    <item.icon
+                                        className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-accent-500' : 'text-gray-400 group-hover:text-navy-700'}`}
+                                        strokeWidth={isActive ? 2.5 : 2}
+                                    />
+                                )}
                                 <span className={isActive ? 'font-semibold text-navy-800' : 'font-medium'}>
                                     {item.label}
                                 </span>

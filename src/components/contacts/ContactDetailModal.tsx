@@ -166,7 +166,7 @@ export function ContactDetailModal({
                                                 <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
                                                     <Phone className="w-5 h-5 text-accent-500" />
                                                 </div>
-                                                <a href={`tel:${phone}`} className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors leading-none mt-[2px]">{phone}</a>
+                                                <a href={`tel:${phone}`} className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors">{phone}</a>
                                             </div>
                                             <CopyButton text={phone} field={`phone-${idx}`} />
                                         </div>
@@ -179,7 +179,7 @@ export function ContactDetailModal({
                                                 <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
                                                     <Mail className="w-5 h-5 text-accent-500" />
                                                 </div>
-                                                <a href={`mailto:${email}`} className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors leading-none mt-[2px]">{email}</a>
+                                                <a href={`mailto:${email}`} className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors">{email}</a>
                                             </div>
                                             <CopyButton text={email} field={`email-${idx}`} />
                                         </div>
@@ -192,7 +192,7 @@ export function ContactDetailModal({
                                                 <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-inner-sm flex-shrink-0">
                                                     <Globe className="w-5 h-5 text-accent-500" />
                                                 </div>
-                                                <a href={contact.website} target="_blank" rel="noopener noreferrer" className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors leading-none mt-[2px]">{contact.website}</a>
+                                                <a href={contact.website} target="_blank" rel="noopener noreferrer" className="text-navy-800 font-medium break-all hover:text-accent-600 transition-colors">{contact.website}</a>
                                             </div>
                                             <CopyButton text={contact.website} field="website" />
                                         </div>

@@ -109,10 +109,7 @@ export function ContactsTable({
                                 <td className="table-cell">
                                     <div className="flex items-center gap-2">
                                         {contact.company && (
-                                            <>
-                                                <Building2 className="w-4 h-4 text-gray-400" />
-                                                <span className="text-gray-700">{contact.company.name}</span>
-                                            </>
+                                            <span className="text-gray-700">{contact.company.name}</span>
                                         )}
                                     </div>
                                 </td>
