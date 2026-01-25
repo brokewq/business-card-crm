@@ -1,4 +1,4 @@
-import { Contact, Tag } from '@/types';
+import { Contact, Tag, DEFAULT_INDUSTRIES, DEFAULT_SOURCES } from '@/types';
 import { Modal } from '@/components/ui/Modal';
 import {
     X,
@@ -115,7 +115,9 @@ export function ContactDetailModal({
                     address: editedContact.address,
                     website: editedContact.website,
                     additional_details: editedContact.additional_details,
-                    company_name: companyName // Send company name
+                    company_name: companyName, // Send company name
+                    source: editedContact.source,
+                    industry: editedContact.industry
                 }),
             });
 
@@ -458,6 +460,45 @@ export function ContactDetailModal({
                                             </div>
                                         )
                                     )}
+
+                                    {/* Source & Industry */}
+                                    <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] text-gray-400 uppercase tracking-wider font-bold ml-1">Source</label>
+                                            {isEditing && editedContact ? (
+                                                <select
+                                                    value={editedContact.source || ''}
+                                                    onChange={(e) => handleInputChange('source', e.target.value)}
+                                                    className="w-full bg-gray-50 rounded-lg border border-clay-border p-2 text-sm text-navy-800 outline-none focus:border-accent-500"
+                                                >
+                                                    <option value="">Select Source</option>
+                                                    {DEFAULT_SOURCES.map(s => <option key={s} value={s}>{s}</option>)}
+                                                </select>
+                                            ) : (
+                                                <div className="bg-gray-50 rounded-lg border border-clay-border p-3 text-sm font-medium text-navy-800">
+                                                    {contact.source || <span className="text-gray-400 italic">Not set</span>}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] text-gray-400 uppercase tracking-wider font-bold ml-1">Industry</label>
+                                            {isEditing && editedContact ? (
+                                                <select
+                                                    value={editedContact.industry || ''}
+                                                    onChange={(e) => handleInputChange('industry', e.target.value)}
+                                                    className="w-full bg-gray-50 rounded-lg border border-clay-border p-2 text-sm text-navy-800 outline-none focus:border-accent-500"
+                                                >
+                                                    <option value="">Select Industry</option>
+                                                    {DEFAULT_INDUSTRIES.map(i => <option key={i} value={i}>{i}</option>)}
+                                                </select>
+                                            ) : (
+                                                <div className="bg-gray-50 rounded-lg border border-clay-border p-3 text-sm font-medium text-navy-800">
+                                                    {contact.industry || (contact.company?.industry) || <span className="text-gray-400 italic">Not set</span>}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
