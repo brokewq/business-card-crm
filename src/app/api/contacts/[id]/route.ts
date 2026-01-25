@@ -50,6 +50,55 @@ export async function PATCH(
         if (website !== undefined) updateData.website = normalizeUrl(website);
         if (additional_details !== undefined) updateData.additional_details = additional_details;
 
+        // 1.5 Handle Company Update
+        if (company_name !== undefined) {
+            let companyId: string | null = null;
+            const domain = getPrimaryDomain(website || updateData.website, email || updateData.email);
+
+            if (company_name === '') {
+                updateData.company_id = null;
+            } else {
+                // Check if company exists
+                let query = supabase
+                    .from('companies')
+                    .select('id')
+                    .eq('user_id', user.id);
+
+                if (domain) {
+                    query = query.eq('domain', domain);
+                } else {
+                    query = query.ilike('name', company_name);
+                }
+
+                const { data: existingCompany } = await query.maybeSingle();
+
+                if (existingCompany) {
+                    companyId = existingCompany.id;
+                } else {
+                    // Create new company
+                    const { data: newCompany, error: createCompanyError } = await supabase
+                        .from('companies')
+                        .insert({
+                            user_id: user.id,
+                            name: company_name,
+                            domain: domain,
+                            description: company_description, // Optional: might want to allow updating this too
+                        })
+                        .select('id')
+                        .single();
+
+                    if (createCompanyError) {
+                        console.error('Error creating company:', createCompanyError);
+                        // Fallback or error? Let's log and ignore or return error. 
+                        // For now, return error to be safe.
+                        return NextResponse.json({ error: "Failed to create new company" }, { status: 500 });
+                    }
+                    companyId = newCompany.id;
+                }
+                updateData.company_id = companyId;
+            }
+        }
+
         if (Object.keys(updateData).length > 0) {
             const { error: updateError } = await supabase
                 .from('contacts')
