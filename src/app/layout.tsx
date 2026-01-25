@@ -12,8 +12,8 @@ export const metadata: Metadata = {
         title: "CardCRM",
     },
     icons: {
-        icon: "/icons/logo.png",
-        apple: "/icons/logo.png",
+        icon: "/icons/favicon-square.jpg",
+        apple: "/icons/favicon-square.jpg",
     },
 };
 
