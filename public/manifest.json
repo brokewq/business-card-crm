@@ -9,15 +9,15 @@
     "orientation": "any",
     "icons": [
         {
-            "src": "/icons/favicon-final.jpg",
+            "src": "/icons/favicon-adobe.png",
             "sizes": "192x192",
-            "type": "image/jpeg",
+            "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "/icons/favicon-final.jpg",
+            "src": "/icons/favicon-adobe.png",
             "sizes": "512x512",
-            "type": "image/jpeg",
+            "type": "image/png",
             "purpose": "any maskable"
         }
     ]
