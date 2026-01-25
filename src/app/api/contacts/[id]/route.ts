@@ -42,13 +42,6 @@ export async function PATCH(
 
         const contactId = params.id;
 
-        // 0. Fetch current contact to know existing company_id if needed
-        const { data: currentContact } = await supabase
-            .from('contacts')
-            .select('company_id')
-            .eq('id', contactId)
-            .single();
-
         // 1. Update basic contact fields
         const updateData: any = {};
         if (name !== undefined) updateData.name = name;
@@ -85,13 +78,6 @@ export async function PATCH(
 
                 if (existingCompany) {
                     companyId = existingCompany.id;
-                    // Optionally update existing company industry if provided
-                    if (industry !== undefined) {
-                        await supabase
-                            .from('companies')
-                            .update({ industry })
-                            .eq('id', companyId);
-                    }
                 } else {
                     // Create new company
                     const { data: newCompany, error: createCompanyError } = await supabase
@@ -101,7 +87,6 @@ export async function PATCH(
                             name: company_name,
                             domain: domain,
                             description: company_description, // Optional: might want to allow updating this too
-                            industry: industry !== undefined ? industry : undefined,
                         })
                         .select('id')
                         .single();
@@ -116,12 +101,6 @@ export async function PATCH(
                 }
                 updateData.company_id = companyId;
             }
-        } else if (industry !== undefined && currentContact?.company_id) {
-            // If only industry is changed (no company_name update), but contact is linked to a company
-            await supabase
-                .from('companies')
-                .update({ industry })
-                .eq('id', currentContact.company_id);
         }
 
         if (Object.keys(updateData).length > 0) {

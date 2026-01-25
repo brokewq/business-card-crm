@@ -303,6 +303,49 @@ export function ContactDetailModal({
                                     day: 'numeric'
                                 })}
                             </div>
+
+                            {/* Industry & Source (Show if present or editing) */}
+                            {(isEditing || contact.industry || contact.source) && (
+                                <div className="space-y-3 pt-4 border-t border-clay-border">
+                                    {/* Industry */}
+                                    <div className="space-y-1">
+                                        <label className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Industry</label>
+                                        {isEditing ? (
+                                            <select
+                                                value={editedContact?.industry || ''}
+                                                onChange={(e) => handleInputChange('industry', e.target.value)}
+                                                className="w-full bg-gray-50 border border-clay-border text-navy-800 text-sm rounded-lg focus:ring-accent-500 focus:border-accent-500 block p-2.5 outline-none"
+                                            >
+                                                <option value="">Select Industry</option>
+                                                {DEFAULT_INDUSTRIES.map((ind) => (
+                                                    <option key={ind} value={ind}>{ind}</option>
+                                                ))}
+                                            </select>
+                                        ) : (
+                                            <p className="text-navy-800 font-medium text-sm">{contact.industry}</p>
+                                        )}
+                                    </div>
+
+                                    {/* Source */}
+                                    <div className="space-y-1">
+                                        <label className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Source</label>
+                                        {isEditing ? (
+                                            <select
+                                                value={editedContact?.source || ''}
+                                                onChange={(e) => handleInputChange('source', e.target.value)}
+                                                className="w-full bg-gray-50 border border-clay-border text-navy-800 text-sm rounded-lg focus:ring-accent-500 focus:border-accent-500 block p-2.5 outline-none"
+                                            >
+                                                <option value="">Select Source</option>
+                                                {DEFAULT_SOURCES.map((src) => (
+                                                    <option key={src} value={src}>{src}</option>
+                                                ))}
+                                            </select>
+                                        ) : (
+                                            <p className="text-navy-800 font-medium text-sm">{contact.source}</p>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Right Column: Details */}
@@ -460,45 +503,6 @@ export function ContactDetailModal({
                                             </div>
                                         )
                                     )}
-
-                                    {/* Source & Industry */}
-                                    <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                                        <div className="space-y-1">
-                                            <label className="text-[10px] text-gray-400 uppercase tracking-wider font-bold ml-1">Source</label>
-                                            {isEditing && editedContact ? (
-                                                <select
-                                                    value={editedContact.source || ''}
-                                                    onChange={(e) => handleInputChange('source', e.target.value)}
-                                                    className="w-full bg-gray-50 rounded-lg border border-clay-border p-2 text-sm text-navy-800 outline-none focus:border-accent-500"
-                                                >
-                                                    <option value="">Select Source</option>
-                                                    {DEFAULT_SOURCES.map(s => <option key={s} value={s}>{s}</option>)}
-                                                </select>
-                                            ) : (
-                                                <div className="bg-gray-50 rounded-lg border border-clay-border p-3 text-sm font-medium text-navy-800">
-                                                    {contact.source || <span className="text-gray-400 italic">Not set</span>}
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="space-y-1">
-                                            <label className="text-[10px] text-gray-400 uppercase tracking-wider font-bold ml-1">Industry</label>
-                                            {isEditing && editedContact ? (
-                                                <select
-                                                    value={editedContact.industry || ''}
-                                                    onChange={(e) => handleInputChange('industry', e.target.value)}
-                                                    className="w-full bg-gray-50 rounded-lg border border-clay-border p-2 text-sm text-navy-800 outline-none focus:border-accent-500"
-                                                >
-                                                    <option value="">Select Industry</option>
-                                                    {DEFAULT_INDUSTRIES.map(i => <option key={i} value={i}>{i}</option>)}
-                                                </select>
-                                            ) : (
-                                                <div className="bg-gray-50 rounded-lg border border-clay-border p-3 text-sm font-medium text-navy-800">
-                                                    {contact.industry || (contact.company?.industry) || <span className="text-gray-400 italic">Not set</span>}
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
