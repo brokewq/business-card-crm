@@ -14,20 +14,20 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
     return (
         <div
             onClick={onClick}
-            className={`card card-hover p-4 cursor-pointer flex items-center gap-4 ${isSelected ? 'ring-2 ring-primary-500' : ''
+            className={`card card-hover p-4 cursor-pointer flex items-center gap-4 ${isSelected ? 'ring-2 ring-accent-500 border-accent-300' : ''
                 }`}
         >
             {/* Content */}
             <div className="flex-1 min-w-0">
                 {/* Name and designation */}
-                <h3 className="font-semibold text-white text-lg truncate">{contact.name}</h3>
+                <h3 className="font-semibold text-navy-800 text-lg truncate">{contact.name}</h3>
                 {contact.designation && (
-                    <p className="text-dark-400 text-sm truncate">{contact.designation}</p>
+                    <p className="text-gray-500 text-sm truncate">{contact.designation}</p>
                 )}
 
                 {/* Company */}
                 {contact.company && (
-                    <div className="flex items-center gap-2 mt-2 text-dark-300">
+                    <div className="flex items-center gap-2 mt-2 text-gray-600">
                         <Building2 className="w-4 h-4 flex-shrink-0" />
                         <span className="text-sm truncate">{contact.company.name}</span>
                     </div>
@@ -39,7 +39,7 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
                         {contact.tags.map((tag) => (
                             <span
                                 key={tag.id}
-                                className="badge text-white text-xs"
+                                className="badge text-navy-700 text-xs"
                                 style={{ backgroundColor: tag.color }}
                             >
                                 {tag.name}
@@ -55,9 +55,9 @@ export function ContactCard({ contact, isSelected, onToggleSelect, onClick }: Co
                     e.stopPropagation();
                     onToggleSelect();
                 }}
-                className={`flex-shrink-0 w-5 h-5 rounded border transition-colors flex items-center justify-center ${isSelected
-                    ? 'bg-primary-500 border-primary-500'
-                    : 'border-dark-600 hover:border-dark-500 bg-dark-800/50'
+                className={`flex-shrink-0 w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center ${isSelected
+                    ? 'bg-accent-500 border-accent-500 shadow-sm'
+                    : 'border-gray-300 hover:border-accent-400 bg-white'
                     }`}
             >
                 {isSelected && <Check className="w-3.5 h-3.5 text-white" />}

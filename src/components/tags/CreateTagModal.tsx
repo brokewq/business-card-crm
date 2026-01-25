@@ -39,8 +39,6 @@ export function CreateTagModal({ isOpen, onClose, onTagCreated }: CreateTagModal
                 setName('');
                 setColor(TAG_COLORS[0]);
                 onTagCreated();
-                // Allow toast to show before closing, or just close and let parent handle toast? 
-                // Parent won't show toast. We show toast here.
                 setTimeout(onClose, 500);
             } else {
                 showToast('Failed to create list', 'error');
@@ -56,7 +54,7 @@ export function CreateTagModal({ isOpen, onClose, onTagCreated }: CreateTagModal
         <Modal isOpen={isOpen} onClose={onClose} title="Create New List">
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label className="block text-sm font-medium text-dark-300 mb-2">
+                    <label className="block text-sm font-medium text-navy-700 mb-2">
                         List Name
                     </label>
                     <input
@@ -70,7 +68,7 @@ export function CreateTagModal({ isOpen, onClose, onTagCreated }: CreateTagModal
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-dark-300 mb-2">
+                    <label className="block text-sm font-medium text-navy-700 mb-2">
                         Color Tag
                     </label>
                     <div className="flex gap-3 flex-wrap">
@@ -80,8 +78,8 @@ export function CreateTagModal({ isOpen, onClose, onTagCreated }: CreateTagModal
                                 type="button"
                                 onClick={() => setColor(c)}
                                 className={`w-8 h-8 rounded-full transition-all ${color === c
-                                        ? 'ring-2 ring-white ring-offset-2 ring-offset-dark-800 scale-110'
-                                        : 'hover:scale-105'
+                                    ? 'ring-2 ring-white ring-offset-2 ring-offset-white scale-110 shadow-md'
+                                    : 'hover:scale-105'
                                     }`}
                                 style={{ backgroundColor: c }}
                             />
@@ -93,7 +91,7 @@ export function CreateTagModal({ isOpen, onClose, onTagCreated }: CreateTagModal
                     <button
                         type="button"
                         onClick={onClose}
-                        className="btn bg-dark-700 text-dark-200 hover:text-white"
+                        className="btn btn-secondary"
                         disabled={loading}
                     >
                         Cancel

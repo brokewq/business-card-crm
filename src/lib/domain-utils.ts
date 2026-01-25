@@ -41,23 +41,48 @@ export function extractDomain(input: string | null | undefined): string | null {
     return domain;
 }
 
+const PUBLIC_DOMAINS = new Set([
+    'gmail.com',
+    'yahoo.com',
+    'hotmail.com',
+    'outlook.com',
+    'aol.com',
+    'icloud.com',
+    'protonmail.com',
+    'zoho.com',
+    'yandex.com',
+    'mail.com',
+    'live.com',
+    'msn.com'
+]);
+
 /**
  * Get the primary domain from a contact's website or email
  * Prefers website over email for domain extraction
+ * Returns null if the domain is a known public email provider
  */
 export function getPrimaryDomain(
     website: string | null | undefined,
     emails: string[] | null | undefined
 ): string | null {
     // Try website first
-    const websiteDomain = extractDomain(website);
+    let websiteDomain = extractDomain(website);
+    
+    // If website domain is public (unlikely but possible), ignore it
+    if (websiteDomain && PUBLIC_DOMAINS.has(websiteDomain)) {
+        websiteDomain = null;
+    }
+
     if (websiteDomain) return websiteDomain;
 
     // Fall back to first email domain
     if (emails && emails.length > 0) {
         for (const email of emails) {
             const emailDomain = extractDomain(email);
-            if (emailDomain) return emailDomain;
+            // Only use if not a public domain
+            if (emailDomain && !PUBLIC_DOMAINS.has(emailDomain)) {
+                return emailDomain;
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { X, CheckCircle, AlertCircle, Info } from 'lucide-react';
 
 interface ToastProps {
@@ -36,7 +36,7 @@ export function Toast({ message, type = 'info', onClose, duration = 4000 }: Toas
             <p className="flex-1 text-sm">{message}</p>
             <button
                 onClick={onClose}
-                className="p-1 hover:bg-dark-700 rounded-lg transition-colors"
+                className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
             >
                 <X className="w-4 h-4" />
             </button>
@@ -56,16 +56,16 @@ let toastId = 0;
 export function useToast() {
     const [toasts, setToasts] = useState<ToastItem[]>([]);
 
-    const showToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
+    const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'info') => {
         const id = ++toastId;
         setToasts((prev) => [...prev, { id, message, type }]);
-    };
+    }, []);
 
-    const removeToast = (id: number) => {
+    const removeToast = useCallback((id: number) => {
         setToasts((prev) => prev.filter((t) => t.id !== id));
-    };
+    }, []);
 
-    const ToastContainer = () => (
+    const ToastContainer = useCallback(() => (
         <div className="fixed bottom-4 right-4 z-50 space-y-2">
             {toasts.map((toast) => (
                 <Toast
@@ -76,7 +76,7 @@ export function useToast() {
                 />
             ))}
         </div>
-    );
+    ), [toasts, removeToast]);
 
     return { showToast, ToastContainer };
 }

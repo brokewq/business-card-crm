@@ -111,11 +111,11 @@ export function VerificationForm({
     return (
         <div className="max-w-4xl mx-auto pb-32 lg:pb-0 min-h-screen flex flex-col">
             {/* Header - Sticky on mobile */}
-            <div className="sticky top-0 z-20 bg-dark-900/95 backdrop-blur-lg pb-2 pt-2 lg:relative lg:bg-transparent lg:backdrop-blur-none lg:pb-0 lg:pt-0 lg:mb-6">
+            <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-lg pb-2 pt-2 lg:relative lg:bg-transparent lg:backdrop-blur-none lg:pb-0 lg:pt-0 lg:mb-6">
                 <div className="flex items-center justify-between lg:block">
                     <div>
-                        <h1 className="text-xl lg:text-2xl font-bold text-white">Verify Contact</h1>
-                        <p className="text-dark-400 text-sm mt-1 hidden lg:block">
+                        <h1 className="text-xl lg:text-2xl font-bold text-navy-500">Verify Contact</h1>
+                        <p className="text-gray-500 text-sm mt-1 hidden lg:block">
                             Review and edit the extracted information
                         </p>
                     </div>
@@ -139,9 +139,9 @@ export function VerificationForm({
             <div className="flex-1 flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6">
                 {/* Card Preview - Sticky on mobile (30% height max) */}
                 <div className="sticky top-16 z-10 lg:relative lg:top-0 lg:self-start">
-                    <div className="card p-3 lg:p-4 bg-dark-800/90 backdrop-blur-sm lg:bg-dark-800/50">
-                        <p className="text-xs font-medium text-dark-400 mb-2 lg:mb-3">Scanned Card</p>
-                        <div className="aspect-[16/10] max-h-[25vh] lg:max-h-none lg:aspect-video rounded-xl overflow-hidden bg-dark-900">
+                    <div className="card p-3 lg:p-4 bg-gray-50/90 backdrop-blur-sm lg:bg-gray-50/50">
+                        <p className="text-xs font-medium text-gray-500 mb-2 lg:mb-3">Scanned Card</p>
+                        <div className="aspect-[16/10] max-h-[25vh] lg:max-h-none lg:aspect-video rounded-xl overflow-hidden bg-white">
                             <img
                                 src={cardImage}
                                 alt="Business Card"
@@ -201,15 +201,15 @@ export function VerificationForm({
                             {formData.email.map((email) => (
                                 <div
                                     key={email}
-                                    className="flex items-center gap-2 px-3 py-2 bg-dark-800 rounded-lg"
+                                    className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg"
                                 >
-                                    <span className="flex-1 text-sm text-dark-200">{email}</span>
+                                    <span className="flex-1 text-sm text-gray-600">{email}</span>
                                     <button
                                         type="button"
                                         onClick={() => removeEmail(email)}
-                                        className="p-2 hover:bg-dark-700 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center"
+                                        className="p-2 hover:bg-gray-100 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center"
                                     >
-                                        <X className="w-5 h-5 text-dark-400" />
+                                        <X className="w-5 h-5 text-gray-500" />
                                     </button>
                                 </div>
                             ))}
@@ -240,15 +240,15 @@ export function VerificationForm({
                             {formData.phone.map((phone) => (
                                 <div
                                     key={phone}
-                                    className="flex items-center gap-2 px-3 py-2 bg-dark-800 rounded-lg"
+                                    className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg"
                                 >
-                                    <span className="flex-1 text-sm text-dark-200">{phone}</span>
+                                    <span className="flex-1 text-sm text-gray-600">{phone}</span>
                                     <button
                                         type="button"
                                         onClick={() => removePhone(phone)}
-                                        className="p-2 hover:bg-dark-700 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center"
+                                        className="p-2 hover:bg-gray-100 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center"
                                     >
-                                        <X className="w-4 h-4 text-dark-400" />
+                                        <X className="w-4 h-4 text-gray-500" />
                                     </button>
                                 </div>
                             ))}

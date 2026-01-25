@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #121212;
-  --foreground: #f8fafc;
-  --card: #1a1a1a;
-  --card-foreground: #f8fafc;
-  --primary: #0ea5e9;
+  --background: #F4F7FA;
+  --foreground: #102a43;
+  --card: #FFFFFF;
+  --card-foreground: #102a43;
+  --primary: #f97316;
   --primary-foreground: #ffffff;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --border: #262626;
-  --input: #1a1a1a;
-  --ring: #0ea5e9;
+  --muted: #E2E8F0;
+  --muted-foreground: #64748b;
+  --border: #E2E8F0;
+  --input: #FFFFFF;
+  --ring: #f97316;
   --radius: 0.75rem;
 }
 
@@ -25,71 +25,71 @@
   }
 
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   }
 
   body {
-    @apply bg-dark-900 text-dark-50 antialiased;
+    @apply bg-clay-bg text-navy-900 antialiased;
     min-height: 100vh;
   }
 }
 
 @layer components {
 
-  /* Premium Button Styles */
+  /* Premium Button Styles - Claymorphism */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:ring-offset-2 focus:ring-offset-clay-bg;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white;
-    @apply hover:from-primary-600 hover:to-primary-700 hover:shadow-lg hover:shadow-primary-500/25;
-    @apply active:scale-[0.98];
+    @apply bg-gradient-to-b from-accent-500 to-accent-600 text-white shadow-clay-md;
+    @apply hover:from-accent-400 hover:to-accent-500 hover:shadow-glow-orange;
+    @apply active:scale-[0.98] active:shadow-clay;
   }
 
   .btn-secondary {
-    @apply bg-dark-700 text-dark-100 border border-dark-600;
-    @apply hover:bg-dark-600 hover:border-dark-500;
+    @apply bg-white text-navy-700 border border-clay-border shadow-clay;
+    @apply hover:bg-clay-hover hover:border-gray-300 hover:shadow-clay-md;
   }
 
   .btn-ghost {
-    @apply text-dark-300 hover:text-dark-100 hover:bg-dark-800;
+    @apply text-gray-500 hover:text-navy-700 hover:bg-gray-100;
   }
 
   .btn-danger {
-    @apply bg-red-500/10 text-red-400 border border-red-500/20;
-    @apply hover:bg-red-500/20 hover:border-red-500/30;
+    @apply bg-red-50 text-red-600 border border-red-200;
+    @apply hover:bg-red-100 hover:border-red-300;
   }
 
-  /* Card Styles */
+  /* Card Styles - Claymorphism */
   .card {
-    @apply bg-dark-800/50 backdrop-blur-sm rounded-2xl border border-dark-700/50;
-    @apply shadow-xl shadow-black/10;
+    @apply bg-white rounded-2xl border border-clay-border;
+    @apply shadow-clay;
   }
 
   .card-hover {
     @apply transition-all duration-300;
-    @apply hover:bg-dark-800/70 hover:border-dark-600/50 hover:shadow-2xl hover:shadow-black/20;
+    @apply hover:shadow-clay-lg hover:border-gray-300;
     @apply hover:-translate-y-0.5;
   }
 
   /* Input Styles */
   .input {
-    @apply w-full rounded-xl bg-dark-800 border border-dark-600 px-4 py-2.5;
-    @apply text-dark-100 placeholder-dark-400;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500;
-    @apply transition-all duration-200;
+    @apply w-full rounded-xl bg-white border border-clay-border px-4 py-2.5;
+    @apply text-navy-900 placeholder-gray-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent-500/30 focus:border-accent-500;
+    @apply transition-all duration-200 shadow-clay;
   }
 
   .input-error {
-    @apply border-red-500 focus:ring-red-500/50 focus:border-red-500;
+    @apply border-red-400 focus:ring-red-500/30 focus:border-red-500;
   }
 
   /* Label Styles */
   .label {
-    @apply block text-sm font-medium text-dark-300 mb-1.5;
+    @apply block text-sm font-medium text-navy-700 mb-1.5;
   }
 
   /* Badge Styles */
@@ -99,70 +99,100 @@
 
   /* Table Styles */
   .table-header {
-    @apply bg-dark-800/80 backdrop-blur-sm sticky top-0 z-10;
+    @apply bg-gray-50 backdrop-blur-sm sticky top-0 z-10;
   }
 
   .table-row {
-    @apply border-b border-dark-700/50 transition-colors hover:bg-dark-800/50;
+    @apply border-b border-clay-border transition-colors hover:bg-gray-50;
   }
 
   .table-cell {
     @apply px-4 py-3 text-sm;
   }
 
-  /* Sidebar Styles */
+  /* Sidebar Styles - Claymorphism */
   .sidebar {
-    @apply w-64 bg-dark-900 border-r border-dark-700/50 h-screen sticky top-0;
+    @apply w-64 bg-white border-r border-clay-border h-screen sticky top-0;
+    @apply shadow-clay;
   }
 
   .sidebar-link {
-    @apply flex items-center gap-3 px-4 py-2.5 text-dark-300 rounded-xl mx-2;
+    @apply flex items-center gap-3 px-4 py-2.5 text-gray-600 rounded-xl mx-2;
     @apply transition-all duration-200;
-    @apply hover:bg-dark-800 hover:text-dark-100;
+    @apply hover:bg-gray-100 hover:text-navy-700;
   }
 
   .sidebar-link-active {
-    @apply bg-gradient-to-r from-primary-500/10 to-primary-600/10 text-primary-400;
-    @apply border border-primary-500/20;
+    @apply bg-accent-50 text-accent-600;
+    @apply border border-accent-200;
   }
 
-  /* Glassmorphism */
+  /* Glassmorphism - Light version */
   .glass {
-    @apply bg-dark-800/30 backdrop-blur-xl border border-dark-700/30;
+    @apply bg-white/80 backdrop-blur-xl border border-white/50;
+    @apply shadow-clay-md;
   }
 
   /* Toast Styles */
   .toast {
     @apply fixed bottom-4 right-4 z-50 px-4 py-3 rounded-xl;
-    @apply bg-dark-800 border border-dark-600 shadow-xl;
+    @apply bg-white border border-clay-border shadow-clay-lg;
     @apply animate-slide-up;
   }
 
   .toast-error {
-    @apply bg-red-500/10 border-red-500/20 text-red-400;
+    @apply bg-red-50 border-red-200 text-red-700;
   }
 
   .toast-success {
-    @apply bg-green-500/10 border-green-500/20 text-green-400;
+    @apply bg-green-50 border-green-200 text-green-700;
+  }
+
+  /* Clay Icon Container */
+  .clay-icon {
+    @apply w-12 h-12 rounded-2xl flex items-center justify-center;
+    @apply bg-gradient-to-br shadow-clay-md;
+    @apply transition-all duration-300;
+    @apply hover:shadow-clay-lg hover:-translate-y-0.5;
+  }
+
+  .clay-icon-primary {
+    @apply from-accent-400 to-accent-600 text-white;
+  }
+
+  .clay-icon-secondary {
+    @apply from-navy-500 to-navy-700 text-white;
+  }
+
+  /* 3D Button Effect */
+  .btn-3d {
+    @apply relative;
+    transform-style: preserve-3d;
+  }
+
+  .btn-3d::after {
+    content: '';
+    @apply absolute inset-0 rounded-xl bg-gradient-to-b from-white/30 to-transparent;
+    pointer-events: none;
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Light theme */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-dark-900;
+  @apply bg-gray-100;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-600 rounded-full;
+  @apply bg-gray-300 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-dark-500;
+  @apply bg-gray-400;
 }
 
 /* Mobile touch targets */
@@ -180,17 +210,17 @@
 
 /* Camera view styles */
 .camera-container {
-  @apply fixed inset-0 bg-black z-50;
+  @apply fixed inset-0 bg-navy-900 z-50;
 }
 
 .camera-controls {
   @apply absolute bottom-0 left-0 right-0 p-6;
-  @apply bg-gradient-to-t from-black/80 to-transparent;
+  @apply bg-gradient-to-t from-navy-900/80 to-transparent;
 }
 
-/* Loading spinner */
+/* Loading spinner - Orange accent */
 .spinner {
-  @apply w-6 h-6 border-2 border-primary-500/30 border-t-primary-500 rounded-full animate-spin;
+  @apply w-6 h-6 border-2 border-accent-200 border-t-accent-500 rounded-full animate-spin;
 }
 
 /* Pulse animation for scanning */
@@ -210,4 +240,14 @@
 
 .scan-pulse {
   animation: scan-pulse 2s infinite;
+}
+
+/* Clay shadow utilities */
+.shadow-clay-inset {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth gradient overlay for cards */
+.card-gradient {
+  @apply bg-gradient-to-br from-white to-gray-50;
 }

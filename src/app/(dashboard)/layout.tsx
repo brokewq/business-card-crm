@@ -16,9 +16,9 @@ export default async function DashboardLayout({
     }
 
     return (
-        <div className="flex h-screen bg-dark-900 overflow-hidden">
+        <div className="flex h-screen bg-clay-bg overflow-hidden">
             {/* Desktop Sidebar */}
-            <div className="hidden lg:block w-64 flex-shrink-0 overflow-y-auto border-r border-dark-700/50">
+            <div className="hidden lg:block w-64 flex-shrink-0 overflow-y-auto border-r border-clay-border">
                 <Sidebar userEmail={user.email || ''} />
             </div>
 

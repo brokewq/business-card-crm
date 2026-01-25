@@ -7,10 +7,8 @@ import {
     Phone,
     Globe,
     MapPin,
-    Briefcase,
     Copy,
     Check,
-    Image as ImageIcon,
     Edit2,
     Loader2
 } from 'lucide-react';
@@ -85,11 +83,11 @@ export function ContactDetailModal({
     const CopyButton = ({ text, field }: { text: string; field: string }) => (
         <button
             onClick={() => copyToClipboard(text, field)}
-            className="p-1.5 rounded-lg hover:bg-dark-700 transition-colors text-dark-400 hover:text-white"
+            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-navy-700"
             title="Copy to clipboard"
         >
             {copiedField === field ? (
-                <Check className="w-4 h-4 text-green-400" />
+                <Check className="w-4 h-4 text-green-500" />
             ) : (
                 <Copy className="w-4 h-4" />
             )}
@@ -98,13 +96,13 @@ export function ContactDetailModal({
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="xl">
-            <div className="bg-dark-800 rounded-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-2xl w-full max-h-[90vh] overflow-y-auto">
                 {/* Header */}
-                <div className="sticky top-0 z-10 bg-dark-800/95 backdrop-blur-sm border-b border-dark-700 p-4 flex items-center justify-between">
-                    <h2 className="text-xl font-bold text-white">Contact Details</h2>
+                <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-clay-border p-4 flex items-center justify-between">
+                    <h2 className="text-xl font-bold text-navy-800">Contact Details</h2>
                     <button
                         onClick={onClose}
-                        className="p-2 rounded-lg hover:bg-dark-700 text-dark-400 hover:text-white transition-colors"
+                        className="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-navy-700 transition-colors"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -117,7 +115,7 @@ export function ContactDetailModal({
                         <div className="lg:w-1/3 space-y-6">
                             {/* Card Image */}
                             {contact.card_image_url ? (
-                                <div className="rounded-xl overflow-hidden bg-dark-900 border border-dark-700/50">
+                                <div className="rounded-xl overflow-hidden bg-gray-50 border border-clay-border shadow-clay">
                                     <img
                                         src={contact.card_image_url}
                                         alt="Business Card"
@@ -125,19 +123,19 @@ export function ContactDetailModal({
                                     />
                                 </div>
                             ) : (
-                                <div className="w-full h-32 rounded-xl bg-dark-900 border border-dark-700/50 flex items-center justify-center text-dark-500 text-sm italic">
+                                <div className="w-full h-32 rounded-xl bg-gray-50 border border-clay-border flex items-center justify-center text-gray-400 text-sm italic">
                                     No card image
                                 </div>
                             )}
 
                             {/* Name & Title (Mobile/Left Column) */}
-                            <div className="text-center lg:text-left pb-4 border-b border-dark-700">
-                                <h3 className="text-2xl font-bold text-white">{contact.name}</h3>
+                            <div className="text-center lg:text-left pb-4 border-b border-clay-border">
+                                <h3 className="text-2xl font-bold text-navy-800">{contact.name}</h3>
                                 {contact.designation && (
-                                    <p className="text-primary-400 mt-1">{contact.designation}</p>
+                                    <p className="text-accent-600 mt-1 font-medium">{contact.designation}</p>
                                 )}
                                 {contact.company && (
-                                    <div className="flex items-center justify-center lg:justify-start gap-2 mt-2 text-dark-300">
+                                    <div className="flex items-center justify-center lg:justify-start gap-2 mt-2 text-gray-600">
                                         <Building2 className="w-4 h-4" />
                                         <span>{contact.company.name}</span>
                                     </div>
@@ -145,7 +143,7 @@ export function ContactDetailModal({
                             </div>
 
                             {/* Created Date */}
-                            <div className="text-center lg:text-left text-dark-500 text-sm">
+                            <div className="text-center lg:text-left text-gray-500 text-sm">
                                 Added on {new Date(contact.created_at).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
@@ -155,18 +153,18 @@ export function ContactDetailModal({
                         </div>
 
                         {/* Right Column: Details */}
-                        <div className="flex-1 space-y-6 lg:border-l lg:border-dark-700 lg:pl-6">
+                        <div className="flex-1 space-y-6 lg:border-l lg:border-clay-border lg:pl-6">
                             {/* Contact Info */}
                             <div className="space-y-4">
-                                <h4 className="text-sm text-dark-400 uppercase tracking-wider font-semibold">Contact Information</h4>
+                                <h4 className="text-sm text-gray-500 uppercase tracking-wider font-semibold">Contact Information</h4>
 
                                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                                     {/* Phones */}
                                     {contact.phone && contact.phone.map((phone, idx) => (
-                                        <div key={`phone-${idx}`} className="flex items-center justify-between bg-dark-900 rounded-xl p-4 border border-dark-700/50">
+                                        <div key={`phone-${idx}`} className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <Phone className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                                                <span className="text-white break-all">{phone}</span>
+                                                <Phone className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                                                <a href={`tel:${phone}`} className="text-navy-700 break-all hover:text-accent-600 transition-colors">{phone}</a>
                                             </div>
                                             <CopyButton text={phone} field={`phone-${idx}`} />
                                         </div>
@@ -174,10 +172,10 @@ export function ContactDetailModal({
 
                                     {/* Emails */}
                                     {contact.email && contact.email.map((email, idx) => (
-                                        <div key={`email-${idx}`} className="flex items-center justify-between bg-dark-900 rounded-xl p-4 border border-dark-700/50 sm:col-span-2 xl:col-span-1">
+                                        <div key={`email-${idx}`} className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2 xl:col-span-1">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <Mail className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                                                <a href={`mailto:${email}`} className="text-white break-all hover:text-primary-400 transition-colors">{email}</a>
+                                                <Mail className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                                                <a href={`mailto:${email}`} className="text-navy-700 break-all hover:text-accent-600 transition-colors">{email}</a>
                                             </div>
                                             <CopyButton text={email} field={`email-${idx}`} />
                                         </div>
@@ -185,10 +183,10 @@ export function ContactDetailModal({
 
                                     {/* Website */}
                                     {contact.website && (
-                                        <div className="flex items-center justify-between bg-dark-900 rounded-xl p-4 border border-dark-700/50 sm:col-span-2">
+                                        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <Globe className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                                                <a href={contact.website} target="_blank" rel="noopener noreferrer" className="text-white break-all hover:text-primary-400 transition-colors">{contact.website}</a>
+                                                <Globe className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                                                <a href={contact.website} target="_blank" rel="noopener noreferrer" className="text-navy-700 break-all hover:text-accent-600 transition-colors">{contact.website}</a>
                                             </div>
                                             <CopyButton text={contact.website} field="website" />
                                         </div>
@@ -196,10 +194,10 @@ export function ContactDetailModal({
 
                                     {/* Address */}
                                     {contact.address && (
-                                        <div className="flex items-center justify-between bg-dark-900 rounded-xl p-4 border border-dark-700/50 sm:col-span-2">
+                                        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-clay-border sm:col-span-2">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <MapPin className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                                                <span className="text-white break-words">{contact.address}</span>
+                                                <MapPin className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                                                <span className="text-navy-700 break-words">{contact.address}</span>
                                             </div>
                                             <CopyButton text={contact.address} field="address" />
                                         </div>
@@ -210,21 +208,21 @@ export function ContactDetailModal({
                             {/* Additional Info */}
                             {contact.additional_details && (
                                 <div className="space-y-2">
-                                    <label className="text-xs text-dark-400 uppercase tracking-wider">Notes</label>
-                                    <div className="bg-dark-900 rounded-xl p-4 border border-dark-700/50">
-                                        <p className="text-dark-200 whitespace-pre-wrap">{contact.additional_details}</p>
+                                    <label className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Notes</label>
+                                    <div className="bg-gray-50 rounded-xl p-4 border border-clay-border">
+                                        <p className="text-gray-700 whitespace-pre-wrap">{contact.additional_details}</p>
                                     </div>
                                 </div>
                             )}
 
                             {/* Tags */}
-                            <div className="pt-4 border-t border-dark-700">
+                            <div className="pt-4 border-t border-clay-border">
                                 <div className="flex items-center justify-between mb-2">
-                                    <label className="text-xs text-dark-400 uppercase tracking-wider">Lists (Tags)</label>
+                                    <label className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Lists (Tags)</label>
                                     {!isEditingTags ? (
                                         <button
                                             onClick={() => setIsEditingTags(true)}
-                                            className="p-1 rounded-lg hover:bg-dark-700 text-primary-400 transition-colors flex items-center gap-1 text-xs font-medium"
+                                            className="p-1 rounded-lg hover:bg-gray-100 text-accent-600 transition-colors flex items-center gap-1 text-xs font-medium"
                                         >
                                             <Edit2 className="w-3 h-3" />
                                             Edit
@@ -233,14 +231,14 @@ export function ContactDetailModal({
                                         <div className="flex gap-2">
                                             <button
                                                 onClick={() => setIsEditingTags(false)}
-                                                className="text-xs text-dark-400 hover:text-white px-2 py-1"
+                                                className="text-xs text-gray-500 hover:text-navy-700 px-2 py-1"
                                                 disabled={savingTags}
                                             >
                                                 Cancel
                                             </button>
                                             <button
                                                 onClick={saveTags}
-                                                className="text-xs bg-primary-500 text-white px-2 py-1 rounded hover:bg-primary-600 flex items-center gap-1"
+                                                className="text-xs bg-accent-500 text-white px-3 py-1 rounded-lg hover:bg-accent-600 flex items-center gap-1 shadow-sm"
                                                 disabled={savingTags}
                                             >
                                                 {savingTags && <Loader2 className="w-3 h-3 animate-spin" />}
@@ -251,9 +249,9 @@ export function ContactDetailModal({
                                 </div>
 
                                 {isEditingTags ? (
-                                    <div className="bg-dark-900 rounded-xl p-3 grid grid-cols-2 gap-2 border border-dark-700/50">
+                                    <div className="bg-gray-50 rounded-xl p-3 grid grid-cols-2 gap-2 border border-clay-border">
                                         {availableTags.length === 0 ? (
-                                            <p className="text-xs text-dark-400 col-span-2 text-center py-2">
+                                            <p className="text-xs text-gray-500 col-span-2 text-center py-2">
                                                 No lists available. Create one in the sidebar.
                                             </p>
                                         ) : (
@@ -262,14 +260,14 @@ export function ContactDetailModal({
                                                     key={tag.id}
                                                     onClick={() => toggleTag(tag.id)}
                                                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${selectedTagIds.has(tag.id)
-                                                        ? 'bg-dark-700 text-white'
-                                                        : 'hover:bg-dark-800 text-dark-300'
+                                                        ? 'bg-white text-navy-700 shadow-sm'
+                                                        : 'hover:bg-white text-gray-600'
                                                         }`}
                                                 >
                                                     <div
-                                                        className={`w-4 h-4 rounded border flex items-center justify-center ${selectedTagIds.has(tag.id)
-                                                            ? 'bg-primary-500 border-primary-500'
-                                                            : 'border-dark-600'
+                                                        className={`w-4 h-4 rounded border-2 flex items-center justify-center ${selectedTagIds.has(tag.id)
+                                                            ? 'bg-accent-500 border-accent-500'
+                                                            : 'border-gray-300'
                                                             }`}
                                                     >
                                                         {selectedTagIds.has(tag.id) && <Check className="w-3 h-3 text-white" />}
@@ -286,7 +284,7 @@ export function ContactDetailModal({
                                             contact.tags.map((tag) => (
                                                 <span
                                                     key={tag.id}
-                                                    className="px-3 py-1 rounded-full text-white text-sm flex items-center gap-2"
+                                                    className="px-3 py-1 rounded-full text-sm flex items-center gap-2"
                                                     style={{ backgroundColor: `${tag.color}20`, border: `1px solid ${tag.color}40`, color: tag.color }}
                                                 >
                                                     <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: tag.color }} />
@@ -294,7 +292,7 @@ export function ContactDetailModal({
                                                 </span>
                                             ))
                                         ) : (
-                                            <span className="text-sm text-dark-500 italic">No tags assigned</span>
+                                            <span className="text-sm text-gray-400 italic">No tags assigned</span>
                                         )}
                                     </div>
                                 )}

@@ -73,25 +73,25 @@ export function TagSidebar({
     return (
         <div className="card p-4">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                    <TagIcon className="w-5 h-5 text-primary-400" />
+                <h3 className="font-semibold text-navy-800 flex items-center gap-2">
+                    <TagIcon className="w-5 h-5 text-accent-500" />
                     Lists
                 </h3>
                 <button
                     onClick={() => setIsCreating(!isCreating)}
-                    className="p-1.5 rounded-lg hover:bg-dark-700 transition-colors"
+                    className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                     {isCreating ? (
-                        <X className="w-5 h-5 text-dark-400" />
+                        <X className="w-5 h-5 text-gray-500" />
                     ) : (
-                        <Plus className="w-5 h-5 text-dark-400" />
+                        <Plus className="w-5 h-5 text-gray-500" />
                     )}
                 </button>
             </div>
 
             {/* Create new tag */}
             {isCreating && (
-                <div className="mb-4 p-3 bg-dark-800 rounded-xl space-y-3">
+                <div className="mb-4 p-3 bg-gray-50 rounded-xl space-y-3 border border-clay-border">
                     <input
                         type="text"
                         placeholder="Tag name"
@@ -105,7 +105,7 @@ export function TagSidebar({
                             <button
                                 key={color}
                                 onClick={() => setNewTagColor(color)}
-                                className={`w-6 h-6 rounded-full transition-transform ${newTagColor === color ? 'ring-2 ring-white ring-offset-2 ring-offset-dark-800 scale-110' : ''
+                                className={`w-6 h-6 rounded-full transition-transform ${newTagColor === color ? 'ring-2 ring-white ring-offset-2 ring-offset-gray-50 scale-110' : ''
                                     }`}
                                 style={{ backgroundColor: color }}
                             />
@@ -125,11 +125,11 @@ export function TagSidebar({
             <button
                 onClick={() => onSelectTag(null)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${!selectedTag
-                        ? 'bg-primary-500/10 text-primary-400'
-                        : 'text-dark-300 hover:bg-dark-800'
+                    ? 'bg-accent-50 text-accent-600 border border-accent-200'
+                    : 'text-gray-600 hover:bg-gray-50'
                     }`}
             >
-                <div className="w-3 h-3 rounded-full bg-dark-500" />
+                <div className="w-3 h-3 rounded-full bg-gray-400" />
                 All Contacts
             </button>
 
@@ -140,8 +140,8 @@ export function TagSidebar({
                         key={tag.id}
                         onClick={() => onSelectTag(tag.id)}
                         className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors group ${selectedTag === tag.id
-                                ? 'bg-primary-500/10 text-primary-400'
-                                : 'text-dark-300 hover:bg-dark-800'
+                            ? 'bg-accent-50 text-accent-600 border border-accent-200'
+                            : 'text-gray-600 hover:bg-gray-50'
                             }`}
                     >
                         <div
@@ -151,16 +151,16 @@ export function TagSidebar({
                         <span className="flex-1 text-left truncate">{tag.name}</span>
                         <button
                             onClick={(e) => handleDelete(tag.id, e)}
-                            className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-500/20 transition-all"
+                            className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-100 transition-all"
                         >
-                            <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                            <Trash2 className="w-3.5 h-3.5 text-red-500" />
                         </button>
                     </button>
                 ))}
             </div>
 
             {tags.length === 0 && !isCreating && (
-                <p className="text-dark-500 text-sm text-center py-4">
+                <p className="text-gray-400 text-sm text-center py-4">
                     No tags yet. Create one to organize your contacts.
                 </p>
             )}

@@ -67,8 +67,8 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
 
     if (!company) {
         return (
-            <div className="text-center py-20 text-dark-400">
-                <h2 className="text-xl font-semibold text-white mb-2">Company not found</h2>
+            <div className="text-center py-20 text-gray-500">
+                <h2 className="text-xl font-semibold text-navy-500 mb-2">Company not found</h2>
                 <Link href="/companies" className="text-primary-400 hover:text-primary-300">
                     Return to Companies
                 </Link>
@@ -80,7 +80,7 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
         <div className="pb-20 lg:pb-0 space-y-6">
             {/* Header */}
             <div>
-                <Link href="/companies" className="inline-flex items-center gap-2 text-dark-400 hover:text-white mb-4 transition-colors">
+                <Link href="/companies" className="inline-flex items-center gap-2 text-gray-500 hover:text-navy-500 mb-4 transition-colors">
                     <ArrowLeft className="w-4 h-4" />
                     Back to Companies
                 </Link>
@@ -91,29 +91,29 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
                             <Building2 className="w-8 h-8 text-primary-400" />
                         </div>
                         <div className="flex-1">
-                            <h1 className="text-2xl font-bold text-white mb-2">{company.name}</h1>
-                            <div className="flex flex-wrap gap-4 text-dark-300">
+                            <h1 className="text-2xl font-bold text-navy-500 mb-2">{company.name}</h1>
+                            <div className="flex flex-wrap gap-4 text-gray-600">
                                 {company.domain && (
                                     <div className="flex items-center gap-1.5">
-                                        <Globe className="w-4 h-4 text-dark-400" />
+                                        <Globe className="w-4 h-4 text-gray-500" />
                                         <span>{company.domain}</span>
                                     </div>
                                 )}
                                 {company.industry && (
-                                    <span className="px-2.5 py-0.5 rounded-full bg-dark-700 text-dark-300 text-sm">
+                                    <span className="px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600 text-sm">
                                         {company.industry}
                                     </span>
                                 )}
                             </div>
                             {company.description && (
-                                <p className="text-dark-400 mt-4 max-w-2xl">
+                                <p className="text-gray-500 mt-4 max-w-2xl">
                                     {company.description}
                                 </p>
                             )}
                         </div>
-                        <div className="flex items-center gap-2 text-dark-400 bg-dark-800/50 px-4 py-2 rounded-xl border border-dark-700/50">
+                        <div className="flex items-center gap-2 text-gray-500 bg-gray-50/50 px-4 py-2 rounded-xl border border-gray-200/50">
                             <Users className="w-4 h-4" />
-                            <span className="font-medium text-white">{contacts.length}</span>
+                            <span className="font-medium text-navy-500">{contacts.length}</span>
                             <span>contact{contacts.length !== 1 ? 's' : ''}</span>
                         </div>
                     </div>
@@ -123,19 +123,19 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
             {/* Contacts List */}
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-white">Associated Contacts</h2>
+                    <h2 className="text-lg font-semibold text-navy-500">Associated Contacts</h2>
 
                     {!isMobile && (
-                        <div className="flex rounded-xl bg-dark-800 p-1">
+                        <div className="flex rounded-xl bg-gray-50 p-1">
                             <button
                                 onClick={() => setViewMode('table')}
-                                className={`p-2 rounded-lg transition-colors ${viewMode === 'table' ? 'bg-dark-700 text-white' : 'text-dark-400'}`}
+                                className={`p-2 rounded-lg transition-colors ${viewMode === 'table' ? 'bg-gray-100 text-navy-500' : 'text-gray-500'}`}
                             >
                                 <LayoutList className="w-5 h-5" />
                             </button>
                             <button
                                 onClick={() => setViewMode('cards')}
-                                className={`p-2 rounded-lg transition-colors ${viewMode === 'cards' ? 'bg-dark-700 text-white' : 'text-dark-400'}`}
+                                className={`p-2 rounded-lg transition-colors ${viewMode === 'cards' ? 'bg-gray-100 text-navy-500' : 'text-gray-500'}`}
                             >
                                 <LayoutGrid className="w-5 h-5" />
                             </button>
@@ -148,7 +148,7 @@ export default function CompanyDetailPage({ params }: { params: { id: string } }
                         <Loader2 className="w-6 h-6 animate-spin text-primary-500" />
                     </div>
                 ) : contacts.length === 0 ? (
-                    <div className="text-center py-10 text-dark-400 bg-dark-800/30 rounded-2xl border border-dark-700/50 border-dashed">
+                    <div className="text-center py-10 text-gray-500 bg-gray-50/30 rounded-2xl border border-gray-200/50 border-dashed">
                         No contacts associated with this company.
                     </div>
                 ) : viewMode === 'table' && !isMobile ? (

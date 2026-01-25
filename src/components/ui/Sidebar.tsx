@@ -10,7 +10,6 @@ import {
     Settings,
     LogOut,
     Sparkles,
-    Tags,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -39,50 +38,55 @@ export function Sidebar({ userEmail }: SidebarProps) {
         <aside className="sidebar">
             <div className="flex flex-col h-full">
                 {/* Logo */}
-                <div className="p-6 border-b border-dark-700/50">
-                    <Link href="/contacts" className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20">
+                <div className="p-6 border-b border-clay-border">
+                    <Link href="/contacts" className="flex items-center gap-3 group">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center shadow-clay-md transition-transform group-hover:scale-105">
                             <Sparkles className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <h1 className="font-bold text-lg text-white">CardCRM</h1>
-                            <p className="text-xs text-dark-400">Business Cards</p>
+                            <h1 className="font-bold text-lg text-navy-800">CardCRM</h1>
+                            <p className="text-xs text-gray-500">Business Cards</p>
                         </div>
                     </Link>
                 </div>
 
                 {/* Navigation */}
-                <nav className="flex-1 py-6 space-y-1">
+                <nav className="flex-1 py-6 space-y-2">
                     {navItems.map((item) => {
                         const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                         return (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`sidebar-link ${isActive ? 'sidebar-link-active' : ''}`}
+                                className={`sidebar-link h-12 ${isActive ? 'sidebar-link-active bg-white border-2 border-accent-200 shadow-sm' : ''}`}
                             >
-                                <item.icon className="w-5 h-5" />
-                                {item.label}
+                                <item.icon
+                                    className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-accent-500' : 'text-gray-400 group-hover:text-navy-700'}`}
+                                    strokeWidth={isActive ? 2.5 : 2}
+                                />
+                                <span className={isActive ? 'font-semibold text-navy-800' : 'font-medium'}>
+                                    {item.label}
+                                </span>
                             </Link>
                         );
                     })}
                 </nav>
 
                 {/* User Section */}
-                <div className="p-4 border-t border-dark-700/50">
+                <div className="p-4 border-t border-clay-border">
                     <div className="flex items-center gap-3 px-2 mb-3">
-                        <div className="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center">
-                            <span className="text-sm font-medium text-dark-300">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-navy-400 to-navy-600 flex items-center justify-center shadow-clay border-2 border-white">
+                            <span className="text-sm font-bold text-white">
                                 {userEmail.charAt(0).toUpperCase()}
                             </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-dark-200 truncate">{userEmail}</p>
+                            <p className="text-sm font-semibold text-navy-800 truncate">{userEmail}</p>
                         </div>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="sidebar-link w-full text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                        className="sidebar-link w-full text-red-500 hover:text-red-600 hover:bg-red-50"
                     >
                         <LogOut className="w-5 h-5" />
                         Sign Out

@@ -22,6 +22,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+import {
+    Users,
+} from 'lucide-react';
+
 export default function ContactsPage() {
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
@@ -139,8 +143,8 @@ export default function ContactsPage() {
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl font-bold text-white">Contacts</h1>
-                        <p className="text-dark-400 mt-1">
+                        <h1 className="text-2xl font-bold text-navy-800">Contacts</h1>
+                        <p className="text-gray-500 mt-1">
                             {contacts.length} contact{contacts.length !== 1 ? 's' : ''}
                             {selectedTag && ` in ${tags.find((t) => t.id === selectedTag)?.name || 'selected tag'}`}
                         </p>
@@ -148,7 +152,7 @@ export default function ContactsPage() {
                     {/* Settings Button */}
                     <Link
                         href="/settings"
-                        className="text-dark-400 hover:text-white transition-colors p-1"
+                        className="text-gray-400 hover:text-navy-700 transition-colors p-1"
                         title="Settings"
                     >
                         <SettingsIcon className="w-6 h-6" />
@@ -160,7 +164,7 @@ export default function ContactsPage() {
                     <div className="flex flex-col sm:flex-row gap-4">
                         {/* Search */}
                         <div className="relative flex-1">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-400" />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                             <input
                                 type="text"
                                 placeholder="Search contacts..."
@@ -173,17 +177,17 @@ export default function ContactsPage() {
                         {/* Actions */}
                         <div className="flex items-center gap-2">
                             {!isMobile && (
-                                <div className="flex rounded-xl bg-dark-800 p-1">
+                                <div className="flex rounded-xl bg-gray-50 p-1">
                                     <button
                                         onClick={() => setViewMode('table')}
-                                        className={`p-2 rounded-lg transition-colors ${viewMode === 'table' ? 'bg-dark-700 text-white' : 'text-dark-400'
+                                        className={`p-2 rounded-lg transition-colors ${viewMode === 'table' ? 'bg-white text-navy-700 shadow-sm' : 'text-gray-500'
                                             }`}
                                     >
                                         <LayoutList className="w-5 h-5" />
                                     </button>
                                     <button
                                         onClick={() => setViewMode('cards')}
-                                        className={`p-2 rounded-lg transition-colors ${viewMode === 'cards' ? 'bg-dark-700 text-white' : 'text-dark-400'
+                                        className={`p-2 rounded-lg transition-colors ${viewMode === 'cards' ? 'bg-white text-navy-700 shadow-sm' : 'text-gray-500'
                                             }`}
                                     >
                                         <LayoutGrid className="w-5 h-5" />
@@ -210,19 +214,19 @@ export default function ContactsPage() {
                         {/* Create List Button */}
                         <button
                             onClick={() => setIsCreateTagModalOpen(true)}
-                            className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-800 text-dark-300 hover:text-white hover:bg-dark-700 transition-colors flex-shrink-0"
+                            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-50 text-gray-600 hover:text-navy-500 hover:bg-gray-100 transition-colors flex-shrink-0"
                             title="Create List"
                         >
                             <Plus className="w-5 h-5" />
                         </button>
 
-                        <div className="w-[1px] h-9 bg-dark-800 mx-1 flex-shrink-0" />
+                        <div className="w-[1px] h-9 bg-gray-50 mx-1 flex-shrink-0" />
 
                         <button
                             onClick={() => setSelectedTag(null)}
-                            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors ${!selectedTag
-                                ? 'bg-primary-500 text-white'
-                                : 'bg-dark-800 text-dark-300 hover:bg-dark-700'
+                            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors shadow-sm ${!selectedTag
+                                ? 'bg-accent-500 text-white'
+                                : 'bg-white text-gray-600 hover:bg-gray-50'
                                 }`}
                         >
                             All Contacts
@@ -231,9 +235,9 @@ export default function ContactsPage() {
                             <button
                                 key={tag.id}
                                 onClick={() => setSelectedTag(tag.id)}
-                                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors ${selectedTag === tag.id
+                                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors shadow-sm ${selectedTag === tag.id
                                     ? 'text-white'
-                                    : 'bg-dark-800 text-dark-300 hover:bg-dark-700'
+                                    : 'bg-white text-gray-600 hover:bg-gray-50'
                                     }`}
                                 style={selectedTag === tag.id ? { backgroundColor: tag.color } : {}}
                             >
@@ -246,21 +250,25 @@ export default function ContactsPage() {
                 {/* Content */}
                 {isLoading ? (
                     <div className="flex items-center justify-center py-20">
-                        <Loader2 className="w-8 h-8 animate-spin text-primary-500" />
+                        <Loader2 className="w-8 h-8 animate-spin text-accent-500" />
                     </div>
                 ) : contacts.length === 0 ? (
                     <div className="card p-12 text-center">
-                        <div className="w-16 h-16 rounded-full bg-dark-700 flex items-center justify-center mx-auto mb-4">
+                        <div className="w-24 h-24 relative mx-auto mb-4">
                             {searchQuery ? (
-                                <Search className="w-8 h-8 text-dark-400" />
+                                <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto">
+                                    <Search className="w-8 h-8 text-gray-400" />
+                                </div>
                             ) : (
-                                <Camera className="w-8 h-8 text-dark-400" />
+                                <div className="w-16 h-16 rounded-full bg-accent-100 flex items-center justify-center mx-auto shadow-clay">
+                                    <Users className="w-8 h-8 text-accent-600" />
+                                </div>
                             )}
                         </div>
-                        <h3 className="text-lg font-semibold text-white mb-2">
+                        <h3 className="text-lg font-semibold text-navy-800 mb-2">
                             {searchQuery ? 'No contacts found' : 'No contacts yet'}
                         </h3>
-                        <p className="text-dark-400 mb-6">
+                        <p className="text-gray-500 mb-6">
                             {searchQuery
                                 ? `No results found for "${searchQuery}". Try a different search term.`
                                 : 'Start by scanning a business card to add your first contact.'}

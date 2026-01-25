@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { compressImage, generateImageFilename } from '@/lib/image-utils';
 import { OCRResult } from '@/types';
@@ -322,8 +323,8 @@ export default function ScanPage() {
                 <div className="w-20 h-20 rounded-full bg-yellow-500/10 flex items-center justify-center mb-4">
                     <WifiOff className="w-10 h-10 text-yellow-400" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">Network Required</h2>
-                <p className="text-dark-400 max-w-md">
+                <h2 className="text-2xl font-bold text-navy-800 mb-2">Network Required</h2>
+                <p className="text-gray-500 max-w-md">
                     Business card scanning requires an active internet connection to process
                     images using AI. Please check your connection and try again.
                 </p>
@@ -335,14 +336,14 @@ export default function ScanPage() {
     if (stage === 'processing') {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
-                <div className="w-20 h-20 rounded-full bg-primary-500/10 flex items-center justify-center mb-4 scan-pulse">
-                    <Camera className="w-10 h-10 text-primary-400" />
+                <div className="w-20 h-20 rounded-full bg-accent-100 flex items-center justify-center mb-4 scan-pulse">
+                    <Camera className="w-10 h-10 text-accent-500" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-2">Processing Card</h2>
-                <p className="text-dark-400">
+                <h2 className="text-2xl font-bold text-navy-800 mb-2">Processing Card</h2>
+                <p className="text-gray-500">
                     AI is extracting contact information...
                 </p>
-                <Loader2 className="w-8 h-8 animate-spin text-primary-500 mt-6" />
+                <Loader2 className="w-8 h-8 animate-spin text-accent-500 mt-6" />
             </div>
         );
     }
@@ -363,8 +364,8 @@ export default function ScanPage() {
     return (
         <div className="max-w-4xl mx-auto pb-20 lg:pb-0 h-[calc(100vh-100px)] flex flex-col">
             <div className="mb-4">
-                <h1 className="text-2xl font-bold text-white">Scan Business Card</h1>
-                <p className="text-dark-400 mt-1">
+                <h1 className="text-2xl font-bold text-navy-800">Scan Business Card</h1>
+                <p className="text-gray-500 mt-1">
                     {cameraActive ? `Align the ${currentSide} of the card` : 'Ready to capture'}
                 </p>
             </div>
@@ -380,11 +381,11 @@ export default function ScanPage() {
                             className="absolute inset-0 w-full h-full object-cover"
                         />
                         {/* Camera Overlay Guide */}
-                        <div className="absolute inset-0 border-2 border-primary-500/50 m-8 rounded-xl pointer-events-none">
-                            <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-500 -mt-1 -ml-1 rounded-tl-xl" />
-                            <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary-500 -mt-1 -mr-1 rounded-tr-xl" />
-                            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-500 -mb-1 -ml-1 rounded-bl-xl" />
-                            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary-500 -mb-1 -mr-1 rounded-br-xl" />
+                        <div className="absolute inset-0 border-2 border-accent-400/50 m-8 rounded-xl pointer-events-none">
+                            <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-accent-500 -mt-1 -ml-1 rounded-tl-xl" />
+                            <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-accent-500 -mt-1 -mr-1 rounded-tr-xl" />
+                            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-accent-500 -mb-1 -ml-1 rounded-bl-xl" />
+                            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-accent-500 -mb-1 -mr-1 rounded-br-xl" />
                         </div>
 
                         {/* Camera Controls */}
@@ -399,7 +400,7 @@ export default function ScanPage() {
 
                                 <button
                                     onClick={stopCamera}
-                                    className="p-3 rounded-full bg-dark-800/50 backdrop-blur-md text-white hover:bg-dark-700 transition-colors absolute right-4 lg:right-0"
+                                    className="p-3 rounded-full bg-gray-50/50 backdrop-blur-md text-navy-500 hover:bg-gray-100 transition-colors absolute right-4 lg:right-0"
                                 >
                                     <X className="w-6 h-6" />
                                 </button>
@@ -407,32 +408,32 @@ export default function ScanPage() {
                         </div>
 
                         {/* Current Side Indicator */}
-                        <div className="absolute top-6 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-sm font-medium">
+                        <div className="absolute top-6 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-navy-500 text-sm font-medium">
                             Capturing: {currentSide.toUpperCase()}
                         </div>
                     </>
                 ) : (
                     /* Placeholder / Preview State */
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-dark-900">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-white">
                         {/* If we have images captured, show them */}
                         {frontImage ? (
                             <div className="grid grid-cols-2 gap-4 w-full h-full max-h-[400px]">
-                                <div className="relative rounded-xl overflow-hidden bg-dark-800 border-2 border-primary-500">
+                                <div className="relative rounded-xl overflow-hidden bg-gray-50 border-2 border-accent-500">
                                     <img src={frontImage} className="w-full h-full object-cover" alt="Front" />
-                                    <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded text-xs text-white">Front</div>
-                                    <button onClick={() => { setFrontImage(null); setCurrentSide('front'); }} className="absolute top-2 right-2 p-1 bg-black/50 rounded-full text-white"><X className="w-4 h-4" /></button>
+                                    <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded text-xs text-navy-500">Front</div>
+                                    <button onClick={() => { setFrontImage(null); setCurrentSide('front'); }} className="absolute top-2 right-2 p-1 bg-black/50 rounded-full text-navy-500"><X className="w-4 h-4" /></button>
                                 </div>
 
-                                <div className={`relative rounded-xl overflow-hidden bg-dark-800 border-2 ${currentSide === 'back' && !backImage ? 'border-dashed border-dark-600' : 'border-dark-700'}`}>
+                                <div className={`relative rounded-xl overflow-hidden bg-gray-50 border-2 ${currentSide === 'back' && !backImage ? 'border-dashed border-gray-300' : 'border-gray-200'}`}>
                                     {backImage ? (
                                         <>
                                             <img src={backImage} className="w-full h-full object-cover" alt="Back" />
-                                            <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded text-xs text-white">Back</div>
-                                            <button onClick={() => { setBackImage(null); setCurrentSide('back'); }} className="absolute top-2 right-2 p-1 bg-black/50 rounded-full text-white"><X className="w-4 h-4" /></button>
+                                            <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 rounded text-xs text-navy-500">Back</div>
+                                            <button onClick={() => { setBackImage(null); setCurrentSide('back'); }} className="absolute top-2 right-2 p-1 bg-black/50 rounded-full text-navy-500"><X className="w-4 h-4" /></button>
                                         </>
                                     ) : (
-                                        <div className="w-full h-full flex flex-col items-center justify-center text-dark-400">
-                                            <div className="w-12 h-12 rounded-full bg-dark-700 flex items-center justify-center mb-2">
+                                        <div className="w-full h-full flex flex-col items-center justify-center text-gray-500">
+                                            <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-2">
                                                 <Camera className="w-6 h-6" />
                                             </div>
                                             <span className="text-sm">Back (Optional)</span>
@@ -443,22 +444,22 @@ export default function ScanPage() {
                         ) : (
                             /* Empty State */
                             <div className="text-center">
-                                <div className="w-24 h-24 rounded-full bg-primary-500/10 flex items-center justify-center mx-auto mb-6">
-                                    <Camera className="w-10 h-10 text-primary-400" />
+                                <div className="w-24 h-24 rounded-full bg-accent-100 flex items-center justify-center mx-auto mb-6 shadow-clay-lg animate-float">
+                                    <Camera className="w-12 h-12 text-accent-500" strokeWidth={1.5} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-2">Start Scanning</h3>
-                                <p className="text-dark-400 max-w-sm mx-auto mb-8">
+                                <h3 className="text-xl font-bold text-navy-800 mb-2">Start Scanning</h3>
+                                <p className="text-gray-500 max-w-sm mx-auto mb-8">
                                     Place your business card in a well-lit area.
                                     We&apos;ll extract all contact details automatically.
                                 </p>
-                                <button onClick={startCamera} className="btn btn-primary px-8 py-3 text-lg shadow-xl shadow-primary-500/20">
+                                <button onClick={startCamera} className="btn btn-primary px-8 py-3 text-lg shadow-glow-orange">
                                     <Camera className="w-6 h-6 mr-2" />
                                     Open Camera
                                 </button>
                                 <div className="mt-6">
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
-                                        className="text-dark-400 text-sm hover:text-primary-400 transition-colors"
+                                        className="text-gray-500 text-sm hover:text-accent-600 transition-colors"
                                     >
                                         or upload from gallery
                                     </button>

@@ -99,7 +99,7 @@ export default function SettingsPage() {
     if (loading) {
         return (
             <div className="flex items-center justify-center py-20">
-                <Loader2 className="w-8 h-8 animate-spin text-primary-500" />
+                <Loader2 className="w-8 h-8 animate-spin text-accent-500" />
             </div>
         );
     }
@@ -108,22 +108,24 @@ export default function SettingsPage() {
         <div className="max-w-4xl mx-auto pb-20 lg:pb-0">
             {/* Header */}
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-                    <SettingsIcon className="w-7 h-7 text-primary-400" />
+                <h1 className="text-2xl font-bold text-navy-800 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-accent-100 flex items-center justify-center">
+                        <SettingsIcon className="w-6 h-6 text-accent-600" />
+                    </div>
                     Settings
                 </h1>
-                <p className="text-dark-400 mt-1">
+                <p className="text-gray-500 mt-1">
                     Manage your account and preferences
                 </p>
             </div>
 
             {/* Account Management */}
             <div className="card p-6 mb-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Account</h2>
+                <h2 className="text-lg font-semibold text-navy-500 mb-4">Account</h2>
                 <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-dark-200 font-medium">Session Control</p>
-                        <p className="text-dark-400 text-sm">Sign out to end your current session safely.</p>
+                        <p className="text-gray-600 font-medium">Session Control</p>
+                        <p className="text-gray-500 text-sm">Sign out to end your current session safely.</p>
                     </div>
                     <button
                         onClick={async () => {
@@ -142,8 +144,8 @@ export default function SettingsPage() {
 
             {/* Export Data */}
             <div className="card p-6 mb-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Export Data</h2>
-                <p className="text-dark-400 text-sm mb-4">
+                <h2 className="text-lg font-semibold text-navy-500 mb-4">Export Data</h2>
+                <p className="text-gray-500 text-sm mb-4">
                     Download all your contacts as an Excel spreadsheet.
                 </p>
                 <button
@@ -167,8 +169,8 @@ export default function SettingsPage() {
 
             {/* Industries */}
             <div className="card p-6 mb-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Industries</h2>
-                <p className="text-dark-400 text-sm mb-4">
+                <h2 className="text-lg font-semibold text-navy-800 mb-4">Industries</h2>
+                <p className="text-gray-500 text-sm mb-4">
                     Add custom industry options for categorizing your contacts.
                 </p>
 
@@ -176,7 +178,7 @@ export default function SettingsPage() {
                     {industries.map((industry) => (
                         <span
                             key={industry}
-                            className="px-3 py-1.5 rounded-full bg-dark-700 text-dark-200 text-sm"
+                            className="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-sm"
                         >
                             {industry}
                         </span>
@@ -206,8 +208,8 @@ export default function SettingsPage() {
 
             {/* Sources */}
             <div className="card p-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Sources</h2>
-                <p className="text-dark-400 text-sm mb-4">
+                <h2 className="text-lg font-semibold text-navy-800 mb-4">Sources</h2>
+                <p className="text-gray-500 text-sm mb-4">
                     Add custom source options for tracking where you met contacts.
                 </p>
 
@@ -215,7 +217,7 @@ export default function SettingsPage() {
                     {sources.map((source) => (
                         <span
                             key={source}
-                            className="px-3 py-1.5 rounded-full bg-dark-700 text-dark-200 text-sm"
+                            className="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-sm"
                         >
                             {source}
                         </span>
@@ -247,4 +249,3 @@ export default function SettingsPage() {
         </div>
     );
 }
-

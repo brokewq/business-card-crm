@@ -37,12 +37,12 @@ export function ContactsTable({
         if (!sortConfig || sortConfig.field !== field) {
             return <ArrowUpDown className="w-3 h-3 opacity-30 group-hover:opacity-100 transition-opacity" />;
         }
-        return sortConfig.direction === 'asc' ? <ArrowUp className="w-3 h-3 text-primary-400" /> : <ArrowDown className="w-3 h-3 text-primary-400" />;
+        return sortConfig.direction === 'asc' ? <ArrowUp className="w-3 h-3 text-accent-500" /> : <ArrowDown className="w-3 h-3 text-accent-500" />;
     };
 
     const SortableHeader = ({ field, label, className = '' }: { field: SortField; label: string; className?: string }) => (
         <th
-            className={`table-cell text-left text-xs font-semibold text-dark-300 uppercase tracking-wider cursor-pointer group hover:text-white transition-colors select-none ${className}`}
+            className={`table-cell text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer group hover:text-navy-700 transition-colors select-none ${className}`}
             onClick={() => onSort?.(field)}
         >
             <div className="flex items-center gap-2">
@@ -63,31 +63,31 @@ export function ContactsTable({
                                     type="checkbox"
                                     checked={allSelected}
                                     onChange={onSelectAll}
-                                    className="w-4 h-4 rounded border-dark-500 bg-dark-700 text-primary-500 focus:ring-primary-500"
+                                    className="w-4 h-4 rounded border-gray-300 bg-white text-accent-500 focus:ring-accent-500"
                                 />
                             </th>
                             <SortableHeader field="name" label="Name" />
                             <SortableHeader field="company" label="Company" />
-                            <th className="table-cell text-left text-xs font-semibold text-dark-300 uppercase tracking-wider">
+                            <th className="table-cell text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Email
                             </th>
-                            <th className="table-cell text-left text-xs font-semibold text-dark-300 uppercase tracking-wider">
+                            <th className="table-cell text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Phone
                             </th>
-                            <th className="table-cell text-left text-xs font-semibold text-dark-300 uppercase tracking-wider">
+                            <th className="table-cell text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Source
                             </th>
-                            <th className="table-cell text-left text-xs font-semibold text-dark-300 uppercase tracking-wider">
+                            <th className="table-cell text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Tags
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-dark-700/50">
+                    <tbody className="divide-y divide-clay-border">
                         {contacts.map((contact) => (
                             <tr
                                 key={contact.id}
                                 onClick={() => onContactClick?.(contact)}
-                                className={`table-row cursor-pointer hover:bg-dark-700/30 ${selectedIds.has(contact.id) ? 'bg-primary-500/5' : ''
+                                className={`table-row cursor-pointer ${selectedIds.has(contact.id) ? 'bg-accent-50' : ''
                                     }`}
                             >
                                 <td className="table-cell" onClick={(e) => e.stopPropagation()}>
@@ -95,14 +95,14 @@ export function ContactsTable({
                                         type="checkbox"
                                         checked={selectedIds.has(contact.id)}
                                         onChange={() => onToggleSelect(contact.id)}
-                                        className="w-4 h-4 rounded border-dark-500 bg-dark-700 text-primary-500 focus:ring-primary-500"
+                                        className="w-4 h-4 rounded border-gray-300 bg-white text-accent-500 focus:ring-accent-500"
                                     />
                                 </td>
                                 <td className="table-cell">
                                     <div>
-                                        <p className="font-medium text-white">{contact.name}</p>
+                                        <p className="font-medium text-navy-800">{contact.name}</p>
                                         {contact.designation && (
-                                            <p className="text-sm text-dark-400">{contact.designation}</p>
+                                            <p className="text-sm text-gray-500">{contact.designation}</p>
                                         )}
                                     </div>
                                 </td>
@@ -110,8 +110,8 @@ export function ContactsTable({
                                     <div className="flex items-center gap-2">
                                         {contact.company && (
                                             <>
-                                                <Building2 className="w-4 h-4 text-dark-400" />
-                                                <span className="text-dark-200">{contact.company.name}</span>
+                                                <Building2 className="w-4 h-4 text-gray-400" />
+                                                <span className="text-gray-700">{contact.company.name}</span>
                                             </>
                                         )}
                                     </div>
@@ -120,13 +120,13 @@ export function ContactsTable({
                                     {contact.email && contact.email.length > 0 && (
                                         <a
                                             href={`mailto:${contact.email[0]}`}
-                                            className="text-primary-400 hover:text-primary-300 transition-colors"
+                                            className="text-accent-600 hover:text-accent-700 transition-colors"
                                         >
                                             {contact.email[0]}
                                         </a>
                                     )}
                                     {contact.email && contact.email.length > 1 && (
-                                        <span className="text-dark-500 text-xs ml-1">
+                                        <span className="text-gray-400 text-xs ml-1">
                                             +{contact.email.length - 1}
                                         </span>
                                     )}
@@ -135,33 +135,33 @@ export function ContactsTable({
                                     {contact.phone && contact.phone.length > 0 && (
                                         <a
                                             href={`tel:${contact.phone[0]}`}
-                                            className="text-dark-200 hover:text-white transition-colors"
+                                            className="text-gray-700 hover:text-navy-700 transition-colors"
                                         >
                                             {contact.phone[0]}
                                         </a>
                                     )}
                                     {contact.phone && contact.phone.length > 1 && (
-                                        <span className="text-dark-500 text-xs ml-1">
+                                        <span className="text-gray-400 text-xs ml-1">
                                             +{contact.phone.length - 1}
                                         </span>
                                     )}
                                 </td>
                                 <td className="table-cell">
-                                    <span className="text-dark-300">{contact.source || '-'}</span>
+                                    <span className="text-gray-600">{contact.source || '-'}</span>
                                 </td>
                                 <td className="table-cell">
                                     <div className="flex flex-wrap gap-1">
                                         {contact.tags?.slice(0, 2).map((tag) => (
                                             <span
                                                 key={tag.id}
-                                                className="badge text-white"
+                                                className="badge text-navy-700"
                                                 style={{ backgroundColor: tag.color }}
                                             >
                                                 {tag.name}
                                             </span>
                                         ))}
                                         {contact.tags && contact.tags.length > 2 && (
-                                            <span className="badge bg-dark-700 text-dark-300">
+                                            <span className="badge bg-gray-100 text-gray-600">
                                                 +{contact.tags.length - 2}
                                             </span>
                                         )}
