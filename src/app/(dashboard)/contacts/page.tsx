@@ -139,7 +139,7 @@ export default function ContactsPage() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 space-y-4 min-w-0">
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4">
                     <div>
