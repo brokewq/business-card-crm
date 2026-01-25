@@ -16,7 +16,7 @@ export default async function DashboardLayout({
     }
 
     return (
-        <div className="flex h-[100dvh] bg-clay-bg overflow-hidden text-navy-900">
+        <div className="flex h-[100dvh] bg-clay-bg overflow-hidden">
             {/* Desktop Sidebar */}
             <div className="hidden lg:block w-64 flex-shrink-0 overflow-y-auto border-r border-clay-border">
                 <Sidebar userEmail={user.email || ''} />
@@ -28,7 +28,7 @@ export default async function DashboardLayout({
             </div>
 
             {/* Main Content */}
-            <main className="flex-1 min-w-0 overflow-y-auto scroll-smooth">
+            <main className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden">
                 <div className="p-4 lg:p-8 pb-24 lg:pb-8 w-full max-w-full">
                     {children}
                 </div>

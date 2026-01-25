@@ -209,7 +209,7 @@ export default function ContactsPage() {
                 </div>
 
                 {/* Mobile Tag Filter */}
-                <div className="lg:hidden overflow-x-auto -mx-4 px-4">
+                <div className="lg:hidden overflow-x-auto -mx-4 px-4 w-[calc(100%+2rem)] max-w-[100vw]">
                     <div className="flex gap-2 pb-2">
                         {/* Create List Button */}
                         <button
