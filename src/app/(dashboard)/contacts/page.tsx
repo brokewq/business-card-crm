@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { Contact, Tag } from '@/types';
-import { ContactsTable } from '@/components/contacts/ContactsTable';
+import { ContactsTable, SortConfig, SortField, FilterConfig } from '@/components/contacts/ContactsTable';
 import { ContactCard } from '@/components/contacts/ContactCard';
 import { ContactDetailModal } from '@/components/contacts/ContactDetailModal';
-import { TagSidebar } from '@/components/tags/TagSidebar';
+import { ListsFilter } from '@/components/contacts/ListsFilter';
 import { CreateTagModal } from '@/components/tags/CreateTagModal';
 import { useToast } from '@/components/ui/Toast';
 import { useContacts } from '@/hooks/useContacts';
@@ -34,33 +34,88 @@ export default function ContactsPage() {
     const [isMobile, setIsMobile] = useState(false);
     const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
     const [isCreateTagModalOpen, setIsCreateTagModalOpen] = useState(false);
-    const [sortConfig, setSortConfig] = useState<{ field: 'name' | 'company' | 'created_at', direction: 'asc' | 'desc' }>({
+
+    // Sort and Filter State
+    const [sortConfig, setSortConfig] = useState<SortConfig>({
         field: 'created_at',
         direction: 'desc'
     });
+    const [filterConfig, setFilterConfig] = useState<FilterConfig>({});
+
     const { showToast, ToastContainer } = useToast();
 
     // SWR Hooks
     const { contacts, isLoading: contactsLoading, mutate: mutateContacts } = useContacts(selectedTag, searchQuery);
     const { tags, isLoading: tagsLoading, mutate: mutateTags } = useTags();
 
+    // Filtering Logic
+    const filteredContacts = contacts.filter((contact) => {
+        // Name Filter
+        if (filterConfig.name && !contact.name.toLowerCase().includes(filterConfig.name.toLowerCase())) {
+            return false;
+        }
+        // Company Filter
+        if (filterConfig.company) {
+            const companyName = contact.company?.name || '';
+            if (!companyName.toLowerCase().includes(filterConfig.company.toLowerCase())) {
+                return false;
+            }
+        }
+        // Source Filter
+        if (filterConfig.source && filterConfig.source.length > 0) {
+            if (!contact.source || !filterConfig.source.includes(contact.source)) {
+                return false;
+            }
+        }
+        // Tags Filter
+        if (filterConfig.tags && filterConfig.tags.length > 0) {
+            const contactTagIds = contact.tags?.map(t => t.id) || [];
+            const hasMatchingTag = filterConfig.tags.some(tagId => contactTagIds.includes(tagId));
+            if (!hasMatchingTag) {
+                return false;
+            }
+        }
+        return true;
+    });
+
     // Sorting Logic
-    const sortedContacts = [...contacts].sort((a, b) => {
+    const sortedContacts = [...filteredContacts].sort((a, b) => {
         const { field, direction } = sortConfig;
         const modifier = direction === 'asc' ? 1 : -1;
 
-        if (field === 'name') {
-            return a.name.localeCompare(b.name) * modifier;
+        switch (field) {
+            case 'name':
+                return a.name.localeCompare(b.name) * modifier;
+            case 'company': {
+                const nameA = a.company?.name || '';
+                const nameB = b.company?.name || '';
+                return nameA.localeCompare(nameB) * modifier;
+            }
+            case 'email': {
+                const emailA = a.email?.[0] || '';
+                const emailB = b.email?.[0] || '';
+                return emailA.localeCompare(emailB) * modifier;
+            }
+            case 'phone': {
+                const phoneA = a.phone?.[0] || '';
+                const phoneB = b.phone?.[0] || '';
+                return phoneA.localeCompare(phoneB) * modifier;
+            }
+            case 'source': {
+                const sourceA = a.source || '';
+                const sourceB = b.source || '';
+                return sourceA.localeCompare(sourceB) * modifier;
+            }
+            case 'tags': {
+                const tagA = a.tags?.[0]?.name || '';
+                const tagB = b.tags?.[0]?.name || '';
+                return tagA.localeCompare(tagB) * modifier;
+            }
+            case 'created_at':
+                return (new Date(a.created_at).getTime() - new Date(b.created_at).getTime()) * modifier;
+            default:
+                return 0;
         }
-        if (field === 'company') {
-            const nameA = a.company?.name || '';
-            const nameB = b.company?.name || '';
-            return nameA.localeCompare(nameB) * modifier;
-        }
-        if (field === 'created_at') {
-            return (new Date(a.created_at).getTime() - new Date(b.created_at).getTime()) * modifier;
-        }
-        return 0;
     });
 
     useEffect(() => {
@@ -75,7 +130,7 @@ export default function ContactsPage() {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    const handleSort = (field: 'name' | 'company' | 'created_at') => {
+    const handleSort = (field: SortField) => {
         setSortConfig(current => ({
             field,
             direction: current.field === field && current.direction === 'asc' ? 'desc' : 'asc'
@@ -128,15 +183,7 @@ export default function ContactsPage() {
 
     return (
         <div className="flex gap-6 pb-20 lg:pb-0">
-            {/* Tag Sidebar - Desktop only */}
-            <div className="hidden lg:block w-64 flex-shrink-0">
-                <TagSidebar
-                    tags={tags}
-                    selectedTag={selectedTag}
-                    onSelectTag={setSelectedTag}
-                    onTagsChange={mutateTags}
-                />
-            </div>
+            {/* Tag Sidebar - Removed for Desktop */}
 
             {/* Main Content */}
             <div className="flex-1 space-y-4 min-w-0">
@@ -145,7 +192,7 @@ export default function ContactsPage() {
                     <div>
                         <h1 className="text-2xl font-bold text-navy-800">Contacts</h1>
                         <p className="text-gray-500 mt-1">
-                            {contacts.length} contact{contacts.length !== 1 ? 's' : ''}
+                            {sortedContacts.length} contact{sortedContacts.length !== 1 ? 's' : ''}
                             {selectedTag && ` in ${tags.find((t) => t.id === selectedTag)?.name || 'selected tag'}`}
                         </p>
                     </div>
@@ -162,16 +209,28 @@ export default function ContactsPage() {
                 {/* Search and Actions */}
                 <div className="card p-4">
                     <div className="flex flex-col sm:flex-row gap-4">
-                        {/* Search */}
-                        <div className="relative flex-1">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                            <input
-                                type="text"
-                                placeholder="Search contacts..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="input pl-11"
-                            />
+                        {/* Search and Filter */}
+                        <div className="flex flex-1 gap-4">
+                            <div className="relative flex-1">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                                <input
+                                    type="text"
+                                    placeholder="Search contacts..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="input pl-11"
+                                />
+                            </div>
+
+                            {/* Desktop Filter Button */}
+                            <div className="hidden lg:block">
+                                <ListsFilter
+                                    tags={tags}
+                                    selectedTag={selectedTag}
+                                    onSelectTag={setSelectedTag}
+                                    onTagsChange={mutateTags}
+                                />
+                            </div>
                         </div>
 
                         {/* Actions */}
@@ -290,6 +349,9 @@ export default function ContactsPage() {
                         onContactClick={setSelectedContact}
                         sortConfig={sortConfig}
                         onSort={handleSort}
+                        filterConfig={filterConfig}
+                        onFilterChange={setFilterConfig}
+                        availableTags={tags}
                     />
                 ) : (
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 min-w-0">
@@ -329,4 +391,3 @@ export default function ContactsPage() {
         </div>
     );
 }
-

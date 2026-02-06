@@ -24,7 +24,15 @@ const SYSTEM_PROMPT = `Analyze the business card image and extract contact detai
 }
 
 Rules:
-- Extract all visible phone numbers and emails.
+- Phone number extraction and normalization:
+  - Extract all phone numbers into the phones array.
+  - For each phone number:
+    - Remove all spaces, dashes, brackets and non-digit characters except +.
+    - If a country calling code is present (e.g. +91, +44), keep it and return in E.164 form (e.g. +919768115139).
+    - If a country code is NOT present, return the number without a + prefix and without ANY country code. Do not guess or assume a country code.
+  - Do not drop phone numbers just because the country code is missing.
+  - If multiple numbers are present, return each as a separate entry.
+- Extract all emails.
 - Predict industry from: [Manufacturing, IT, Trading, Healthcare, Retail, Real Estate, Legal, Other].
 - Return ONLY the JSON object. No Markdown formatting, no code blocks.`;
 
