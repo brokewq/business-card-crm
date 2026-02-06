@@ -17,6 +17,23 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { FullScreenImageViewer } from '@/components/ui/FullScreenImageViewer';
+import { WhatsAppIcon, GmailIcon } from '../icons/BrandIcons';
+
+// Utility functions for WhatsApp and Email actions
+function sanitizePhoneForWhatsApp(phone: string): string {
+    return phone.replace(/\D/g, '');
+}
+
+function openWhatsAppChat(phone: string): void {
+    const sanitizedPhone = sanitizePhoneForWhatsApp(phone);
+    const url = `https://wa.me/${sanitizedPhone}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function openEmailClient(email: string): void {
+    const encodedEmail = encodeURIComponent(email);
+    window.location.href = `mailto:${encodedEmail}`;
+}
 
 interface ContactDetailModalProps {
     contact: Contact | null;
@@ -294,6 +311,38 @@ export function ContactDetailModal({
                                     )
                                 )}
                             </div>
+
+                            {/* Quick Action Buttons - Mobile/Tablet */}
+                            {!isEditing && (
+                                <div className="flex items-center justify-center lg:justify-start gap-3 py-3">
+                                    <button
+                                        onClick={() => contact.phone?.[0] && openWhatsAppChat(contact.phone[0])}
+                                        disabled={!contact.phone || contact.phone.length === 0}
+                                        aria-label="Open WhatsApp chat"
+                                        title="WhatsApp"
+                                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all ${contact.phone && contact.phone.length > 0
+                                                ? 'bg-green-500 text-white hover:bg-green-600 shadow-md hover:shadow-lg'
+                                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                            }`}
+                                    >
+                                        <WhatsAppIcon className="w-5 h-5" />
+                                        <span>WhatsApp</span>
+                                    </button>
+                                    <button
+                                        onClick={() => contact.email?.[0] && openEmailClient(contact.email[0])}
+                                        disabled={!contact.email || contact.email.length === 0}
+                                        aria-label="Send email"
+                                        title="Email"
+                                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all ${contact.email && contact.email.length > 0
+                                                ? 'bg-red-500 text-white hover:bg-red-600 shadow-md hover:shadow-lg'
+                                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                            }`}
+                                    >
+                                        <GmailIcon className="w-5 h-5" />
+                                        <span>Email</span>
+                                    </button>
+                                </div>
+                            )}
 
                             {/* Created Date */}
                             <div className="text-center lg:text-left text-gray-500 text-sm">
